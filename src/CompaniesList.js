@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
+import CompanyCard from './CompanyCard';
 
 
 /**
@@ -25,12 +26,21 @@ function CompaniesList() {
     fetchCompanies();
   }, []);
 
-
   if (companies.isLoading) return <i>Loading...</i>;
+
 
   return (
     <div>
       <h1>Companies List</h1>
+
+      {companies.data.map(c  => (
+
+<CompanyCard key={c.handle}
+             name={c.name}
+             logoUrl={c.logoUrl}
+             handle={c.handle}
+             description={c.description}/>
+))}
 
     </div>
 

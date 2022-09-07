@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
+import JobCardList from "./JobCardList";
 
 /**
  * Jobs List
@@ -7,7 +8,7 @@ import JoblyApi from './api';
  * State
  * list of jobs [{id, title,salary,equity,companyHandle,companyName }, ...]
  *
- * App -> Routes -> JobsList -> JobDetail
+ * App -> Routes -> JobsList -> JobCard
  *
  */
 
@@ -31,7 +32,7 @@ function JobsList() {
   return (
     <div>
       <h1>Jobs List</h1>
-
+      <JobCardList jobs={jobs.data}/>
     </div>
 
   );
