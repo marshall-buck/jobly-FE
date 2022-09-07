@@ -9,27 +9,27 @@ import JobCard from "./JobCard";
  *
 */
 
-function JobCardList({jobs}){
+function JobCardList({ jobs }) {
 
 
 
-  return(
+  return (
     <div>
-      {jobs.map( j => (
+      {jobs.map(j => (
         j.companyName
           ?
-          <JobCard title={j.title}
-                   salary={j.salary}
-                   equity={j.equity}
-                   companyName={j.companyName}/>
-           :
-          <JobCard title={j.title}
-                   salary={j.salary}
-                   equity={j.equity}/>
+          <JobCard key={j.id} title={j.title}
+            salary={j.salary}
+            equity={j.equity}
+            companyName={j.companyName} />
+          :
+          <JobCard key={j.id} title={j.title}
+            salary={j.salary}
+            equity={j.equity} />
 
       ))}
     </div>
-  )
+  );
 }
 
 export default JobCardList;

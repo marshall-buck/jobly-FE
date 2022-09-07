@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 /**
  * CompanyCard
  *
@@ -8,18 +8,19 @@ import {Link} from "react-router-dom";
  * App => RoutesList => CompaniesList => CompanyCard
  */
 
-function CompanyCard({handle,name,description,logoUrl}){
+function CompanyCard({ handle, name, description, logoUrl }) {
 
 
-  return(
+  return (
     <Link to={`/companies/${handle}`} className="CompanyCard">
       <div >
         <h2>{name}</h2>
         <p>{description}</p>
-        <img src={logoUrl} alt={name}></img>
+        {logoUrl && <img src={logoUrl} alt={name}></img>}
+
       </div>
     </Link>
-  )
+  );
 }
 
 export default CompanyCard;

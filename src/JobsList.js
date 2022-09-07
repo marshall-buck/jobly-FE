@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
 import JobCardList from "./JobCardList";
+import SearchBar from './SearchBar';
+
 
 /**
  * Jobs List
@@ -14,6 +16,7 @@ import JobCardList from "./JobCardList";
 
 function JobsList() {
   const [jobs, setJobs] = useState({ data: null, isLoading: true });
+  /**  */
 
   useEffect(function fetchCompaniesOnLoad() {
     async function fetchJobs() {
@@ -27,12 +30,23 @@ function JobsList() {
   }, []);
 
 
+  /** handle submit of form set new state */
+  async function handleSearch(term) {
+
+    setJobs({ ...jobs, isLoading: true });
+    const jobsResults = await JoblyApi.getJobs(term);
+    setJobs({ data: jobsResults, isLoading: false });
+
+  }
+
+
   if (jobs.isLoading) return <i>Loading...</i>;
 
   return (
     <div>
       <h1>Jobs List</h1>
-      <JobCardList jobs={jobs.data}/>
+      <SearchBar handleSearch={handleSearch} />
+      <JobCardList jobs={jobs.data} />
     </div>
 
   );

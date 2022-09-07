@@ -66,7 +66,7 @@ class JoblyApi {
    * returns array pf job objects
    * [{id, title,salary,equity,companyHandle,companyName }, ...]
    */
-  // TODO: {title: title}
+
   static async getJobs(title) {
     const res = await this.request(`jobs`, { title });
     return res.jobs;
