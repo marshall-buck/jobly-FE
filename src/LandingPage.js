@@ -1,7 +1,7 @@
 /**
  * Landing Page
  *
- *
+ * App -> Routes -> LandingPage
  */
 
 function LandingPage() {

@@ -9,7 +9,9 @@ import JobsList from "./JobsList";
 
 /**
  * RouteList
+ * App -> Routes (LandingPage,CompaniesList, CompanyDetail )
  *
+ *  not found goes to Homepage
  */
 
 function RoutesList() {

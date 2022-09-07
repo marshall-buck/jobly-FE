@@ -54,13 +54,9 @@ class JoblyApi {
    *  [ {handle, name, description, numEmployees,logoUrl}, ...]
    */
 
-  static async getCompanies(nameLike = null) {
-    let res;
-    if (!nameLike) {
-      res = await this.request("companies/");
-    } else {
-      res = await this.request(`companies/?=name${nameLike}`);
-    }
+  static async getCompanies(name) {
+    const res = await this.request(`companies`, { name });
+
     return res.companies;
   }
 
@@ -70,14 +66,9 @@ class JoblyApi {
    * returns array pf job objects
    * [{id, title,salary,equity,companyHandle,companyName }, ...]
    */
-
-  static async getJobs(title = null) {
-    let res;
-    if (!title) {
-      res = await this.request("jobs/");
-    } else {
-      res = await this.request(`jobs/?title=${title}`);
-    }
+  // TODO: {title: title}
+  static async getJobs(title) {
+    const res = await this.request(`jobs`, { title });
     return res.jobs;
   }
 
