@@ -40,10 +40,50 @@ class JoblyApi {
 
   /** Get details on a company by handle. */
 
-  static async getCompany(handle) {
+  static async getCompanyByHandle(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
+  /** Get details on a company by handle. */
+  //TODO: make sure this works
+  static async getCompanies(nameLike=null) {
+    let res;
+    if (!nameLike){
+      res = await this.request("companies/");
+    } else {
+      res = await this.request(`companies/?=name${nameLike}`);
+    }
+    return res.company;
+  }
+
+
+
+  // /**Get all companies */
+
+  // static async getCompanies() {
+  //   let res = await this.request(`companies/`);
+  //   return res.companies;
+  // }
+
+  /**Get all jobs */
+  //TODO: make sure this works
+  static async getJobs(title=null) {
+    let res;
+    if (!title){
+      res = await this.request("jobs/");
+    } else {
+      res = await this.request(`jobs/?title=${title}`);
+    }
+    return res.jobs;
+  }
+
+//   /**Get list of jobs matching search term */
+
+//   static async getJobsByTerm(term) {
+//     let res = await this.request(`jobs/?title=${term}`);
+//     return res.jobs;
+//   }
 }
+
+export default JoblyApi;
