@@ -30,7 +30,6 @@ function JobCardList({jobs}){
       ))}
     </div>
   )
-
 }
 
 export default JobCardList;
