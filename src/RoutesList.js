@@ -18,7 +18,7 @@ import EditProfile from "./EditProfile";
  *  not found goes to Homepage
  */
 
-function RoutesList(handleSignup) {
+function RoutesList({handleSignup}) {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />

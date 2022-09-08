@@ -24,10 +24,12 @@ function App() {
   async function handleSignup(formData){
 
     const token = await JoblyApi.handleSignup(formData);
-    setToken(token);
+    // setToken(token);
 
-    const payload = jwt_decode(token);
-    setUser(payload);
+    // JoblyApi.token = token;
+
+    // const payload = jwt_decode(token);
+    // setUser(payload);
   }
 
 
