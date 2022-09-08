@@ -4,9 +4,10 @@ import RoutesList from "./RoutesList";
 import './App.css';
 import userContext from "./userContext";
 import {useState} from "react";
-import {JoblyApi} from "./api";
+import JoblyApi from "./api";
+import jwt_decode from "jwt-decode";
 
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 /** App Component
  *
@@ -25,7 +26,7 @@ function App() {
     const token = await JoblyApi.handleSignup(formData);
     setToken(token);
 
-    const payload = jwt.decode(token);
+    const payload = jwt_decode(token);
     setUser(payload);
   }
 
