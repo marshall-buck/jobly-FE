@@ -18,9 +18,16 @@ function NavBar({ handleLogout }) {
 
   return (<div className="NavBar">
     <NavLink to='/'>Jobly</NavLink>
-    <NavLink to='/companies'>Companies</NavLink>
-    <NavLink to='/jobs'>Jobs</NavLink>
-    {user && <NavLink to='/' onClick={handleLogout} >Log out {user.username}</NavLink>}
+
+    {user && <div>  <NavLink to='/companies'>Companies</NavLink>
+      <NavLink to='/jobs'>Jobs</NavLink>
+      <NavLink to='/' onClick={handleLogout} >Log out {user.username}</NavLink>
+    </div>
+    }
+
+    {!user && <div><NavLink to='/login'>Login</NavLink>
+
+      <NavLink to='/signup'>Sign Up</NavLink></div>}
 
 
   </div>);
