@@ -7,8 +7,13 @@ import { useState } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 
-
-
+/** onMount is there token
+ * if(token or user) user is logged in show welcome back message
+ *  else make user log in
+ *
+ *
+ */
+// TODO:When user logs in go to companies route
 /** App Component
  *
  *
@@ -17,9 +22,10 @@ import jwt_decode from "jwt-decode";
 
 function App() {
 
-
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+
+
 
   async function handleSignup(formData) {
 

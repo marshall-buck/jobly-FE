@@ -21,7 +21,7 @@ class JoblyApi {
   //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
   //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
-    static token = "";
+  static token = "";
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -82,11 +82,11 @@ class JoblyApi {
    *  returns JWT
    */
 
-  static async handleSignup(formData){
-    let res = await this.request(`auth/register`,formData, 'POST');
-    console.log(res);
+  static async handleSignup(formData) {
+    let res = await this.request(`auth/register`, formData, 'POST');
 
-    return res.data;
+
+    return res.token;
   }
 
 
