@@ -7,6 +7,8 @@ import JobsList from "./jobs/JobsList";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import EditProfile from "./auth/EditProfile";
+import { useContext } from 'react';
+import userContext from './userContext';
 
 
 
@@ -18,16 +20,20 @@ import EditProfile from "./auth/EditProfile";
  *  not found goes to Homepage
  */
 
-function RoutesList({ handleSignup, handleLogin }) {
+function RoutesList({ handleSignup, handleLogin, handleEditForm }) {
+  const { user } = useContext(userContext);
+
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
       <Route path='/login' element={<Login handleLogin={handleLogin} />} />
       <Route path='/signup' element={<Signup handleSignup={handleSignup} />} />
-      <Route path='/profile' element={<EditProfile />} />
+
+      { user && <>
+      <Route path='/profile' element={<EditProfile handleEditForm={handleEditForm}/>} />
       <Route path='/companies' element={<CompaniesList />} />
       <Route path='/companies/:handle' element={<CompanyDetail />} />
-      <Route path='/jobs' element={<JobsList />} />
+      <Route path='/jobs' element={<JobsList />} /> </>}
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

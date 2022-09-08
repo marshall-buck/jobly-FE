@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import userContext from '../userContext';
 
@@ -21,19 +21,15 @@ import userContext from '../userContext';
 */
 
 
-function EditProfile({ handleProfileEdit }) {
+function EditProfile({ handleEditForm }) {
 
   const { user } = useContext(userContext);
-  const [formData, setFormData] = useState(null);
+  // console.log(user);
+  // const { username, firstName, lastName, email } = user;
 
-  //TODO: does !user cover everything needed
-  if (!user) {
-    return <Navigate to="/" />;
-  } else {
-    const { username, firstName, lastName, email } = user;
-    setFormData({ username, firstName, lastName, email });
-  }
+  const [formData, setFormData] = useState(user);
 
+  // setFormData({ username, firstName, lastName, email });
 
 
   /** Update local state w/curr state of input elem */
@@ -45,9 +41,9 @@ function EditProfile({ handleProfileEdit }) {
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleProfileEdit(formData);
+    await handleEditForm(formData);
     // TODO: setFormData(initialState);
   }
 
@@ -58,7 +54,7 @@ function EditProfile({ handleProfileEdit }) {
         type="text"
         id="username"
         name="username"
-        value="change me later"
+        value={formData.username}
         onChange={handleChange}
         disabled
       />

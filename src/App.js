@@ -55,9 +55,6 @@ function App() {
     const token = await JoblyApi.loginUserApi(formData);
     setToken(token);
     localStorage.setItem('token', token);
-
-
-
   }
 
   function handleLogout() {
@@ -67,6 +64,12 @@ function App() {
 
   }
 
+  async function handleEditForm(formData) {
+    const user = await JoblyApi.handleEditForm(formData);
+    setUser(user.user);
+    console.log('user from app', user);
+  }
+
 
 
   return (
@@ -74,7 +77,7 @@ function App() {
       <BrowserRouter>
         <NavBar handleLogout={handleLogout} />
         <div className="container">
-          <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} />
+          <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} handleEditForm={handleEditForm}/>
         </div>
       </BrowserRouter>
     </userContext.Provider>

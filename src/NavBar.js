@@ -21,6 +21,7 @@ function NavBar({ handleLogout }) {
 
     {user && <div>  <NavLink to='/companies'>Companies</NavLink>
       <NavLink to='/jobs'>Jobs</NavLink>
+      <NavLink to='/profile'>Profile</NavLink>
       <NavLink to='/' onClick={handleLogout} >Log out {user.username}</NavLink>
     </div>
     }

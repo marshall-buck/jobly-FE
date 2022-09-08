@@ -108,7 +108,21 @@ class JoblyApi {
   /**
    * edit profile
    * {firstName, lastName, email}
+   *
+   * Returns { username, firstName, lastName, email, isAdmin }
    */
+  static async handleEditForm(formData) {
+    const { username, firstName, lastName, email } = formData;
+
+
+    const res = await this.request(
+      `users/${username}`, { firstName, lastName, email }, 'PATCH');
+      console.log('response',res);
+
+      return res;
+  }
+
+
 
 
 
