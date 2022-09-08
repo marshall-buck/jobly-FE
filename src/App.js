@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import RoutesList from "./RoutesList";
 import './App.css';
 import userContext from "./userContext";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 
@@ -51,12 +51,17 @@ function App() {
     setUser(user);
   }
 
+  function handleLogout() {
+    setToken(null);
+    setUser(null);
+  }
+
 
 
   return (
     <userContext.Provider value={{ user, token }}>
       <BrowserRouter>
-        <NavBar />
+        <NavBar handleLogout={handleLogout} />
         <div className="container">
           <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} />
         </div>

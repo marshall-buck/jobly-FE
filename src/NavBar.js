@@ -10,12 +10,18 @@ import userContext from './userContext';
  */
 //App -> NavBar -> NavLink
 
-function NavBar() {
+function NavBar({ handleLogout }) {
   const { user } = useContext(userContext);
+
+
+
+
   return (<div className="NavBar">
     <NavLink to='/'>Jobly</NavLink>
     <NavLink to='/companies'>Companies</NavLink>
     <NavLink to='/jobs'>Jobs</NavLink>
+    {user && <NavLink to='/' onClick={handleLogout} >Log out {user.username}</NavLink>}
+
 
   </div>);
 }

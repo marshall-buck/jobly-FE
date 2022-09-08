@@ -105,6 +105,11 @@ class JoblyApi {
     return res.user;
   }
 
+  /**
+   * edit profile
+   * {firstName, lastName, email}
+   */
+
 
 
 
