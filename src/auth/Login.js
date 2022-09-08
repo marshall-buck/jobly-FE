@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 /** Login
 *
 * Props
@@ -18,7 +19,7 @@ const initialState = {
 function Login({ handleLogin }) {
 
   const [formData, setFormData] = useState(initialState);
-
+  const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
   function handleChange(evt) {
@@ -29,10 +30,11 @@ function Login({ handleLogin }) {
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleLogin(formData);
+    await handleLogin(formData);
     setFormData(initialState);
+    navigate("/companies");
   }
 
   return (

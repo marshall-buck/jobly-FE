@@ -3,17 +3,11 @@ import NavBar from "./NavBar";
 import RoutesList from "./RoutesList";
 import './App.css';
 import userContext from "./userContext";
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 
-/** onMount is there token
- * if(token or user)
- *  else make user log in
- *
- *
- */
-// TODO:When user logs in go to companies route
+
 /** App Component
  *
  *
@@ -23,7 +17,28 @@ import jwt_decode from "jwt-decode";
 function App() {
 
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+
+  useEffect(function checkIfToken() {
+
+    async function checkLocalStorage() {
+      if (token) {
+        JoblyApi.token = token;
+        const payload = jwt_decode(token);
+        const user = await JoblyApi.getUserData(payload.username);
+
+        setUser(user);
+
+      }
+      else {
+        setUser(null);
+      }
+
+    }
+    checkLocalStorage();
+  }, [token]);
+
 
 
 
@@ -31,29 +46,25 @@ function App() {
 
     const token = await JoblyApi.handleSignup(formData);
     setToken(token);
+    localStorage.setItem('token', token);
 
-    JoblyApi.token = token;
-
-    const payload = jwt_decode(token);
-    setUser(payload);
   }
 
   async function handleLogin(formData) {
-    console.log(formData);
+
     const token = await JoblyApi.loginUserApi(formData);
     setToken(token);
+    localStorage.setItem('token', token);
 
-    JoblyApi.token = token;
 
-    const payload = jwt_decode(token);
-    setUser(payload);
-    const user = await JoblyApi.getUserData(payload.username);
-    setUser(user);
+
   }
 
   function handleLogout() {
     setToken(null);
     setUser(null);
+    localStorage.removeItem('token');
+
   }
 
 
