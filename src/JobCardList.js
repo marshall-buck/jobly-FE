@@ -16,16 +16,12 @@ function JobCardList({ jobs }) {
   return (
     <div>
       {jobs.map(j => (
-        j.companyName
-          ?
-          <JobCard key={j.id} title={j.title}
-            salary={j.salary}
-            equity={j.equity}
-            companyName={j.companyName} />
-          :
-          <JobCard key={j.id} title={j.title}
-            salary={j.salary}
-            equity={j.equity} />
+
+
+        <JobCard key={j.id} title={j.title}
+          salary={j.salary}
+          equity={j.equity}
+          companyName={j.companyName} />
 
       ))}
     </div>
