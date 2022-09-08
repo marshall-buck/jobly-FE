@@ -4,6 +4,10 @@ import LandingPage from "./LandingPage";
 import CompaniesList from "./CompaniesList";
 import CompanyDetail from "./CompanyDetail";
 import JobsList from "./JobsList";
+import Login from "./Login";
+import Signup from "./Signup";
+import EditProfile from "./EditProfile";
+
 
 
 
@@ -18,6 +22,9 @@ function RoutesList() {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/signup' element={<Signup />} />
+      <Route path='/profile' element={<EditProfile/>} />
       <Route path='/companies' element={<CompaniesList />} />
       <Route path='/companies/:handle' element={<CompanyDetail />} />
       <Route path='/jobs' element={<JobsList />} />
