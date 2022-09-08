@@ -8,7 +8,7 @@ import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 
 /** onMount is there token
- * if(token or user) user is logged in show welcome back message
+ * if(token or user)
  *  else make user log in
  *
  *
@@ -38,6 +38,19 @@ function App() {
     setUser(payload);
   }
 
+  async function handleLogin(formData) {
+    console.log(formData);
+    const token = await JoblyApi.loginUserApi(formData);
+    setToken(token);
+
+    JoblyApi.token = token;
+
+    const payload = jwt_decode(token);
+    setUser(payload);
+    const user = await JoblyApi.getUserData(payload.username);
+    setUser(user);
+  }
+
 
 
   return (
@@ -45,7 +58,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <div className="container">
-          <RoutesList handleSignup={handleSignup} />
+          <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} />
         </div>
       </BrowserRouter>
     </userContext.Provider>

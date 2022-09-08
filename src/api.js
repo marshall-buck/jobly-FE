@@ -85,8 +85,24 @@ class JoblyApi {
   static async handleSignup(formData) {
     let res = await this.request(`auth/register`, formData, 'POST');
 
+    return res.token;
+  }
+  /** logs in user
+   * -returns token
+   */
+  static async loginUserApi(formData) {
+    const res = await this.request(`auth/token`, formData, 'POST');
 
     return res.token;
+  }
+
+
+  /** gets all user data
+   * receives user data
+   */
+  static async getUserData(username) {
+    const res = await this.request(`users/${username}`);
+    return res.user;
   }
 
 

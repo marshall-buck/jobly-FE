@@ -16,7 +16,7 @@ function LandingPage() {
     <div>
       <h1>Welcome to the Jungle</h1>
       {user
-        ? <p> Welcome back: {user}</p>
+        ? <p> Welcome back: {user.username}</p>
         : <div> <Link to='/login'>Log In</Link>
           <Link to='/signup'>Sign Up</Link>
         </div>

@@ -18,11 +18,11 @@ import EditProfile from "./auth/EditProfile";
  *  not found goes to Homepage
  */
 
-function RoutesList({ handleSignup }) {
+function RoutesList({ handleSignup, handleLogin }) {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
-      <Route path='/login' element={<Login />} />
+      <Route path='/login' element={<Login handleLogin={handleLogin} />} />
       <Route path='/signup' element={<Signup handleSignup={handleSignup} />} />
       <Route path='/profile' element={<EditProfile />} />
       <Route path='/companies' element={<CompaniesList />} />
