@@ -18,12 +18,12 @@ import EditProfile from "./EditProfile";
  *  not found goes to Homepage
  */
 
-function RoutesList() {
+function RoutesList(handleSignup) {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
       <Route path='/login' element={<Login/>} />
-      <Route path='/signup' element={<Signup />} />
+      <Route path='/signup' element={<Signup handleSignup={handleSignup}/>} />
       <Route path='/profile' element={<EditProfile/>} />
       <Route path='/companies' element={<CompaniesList />} />
       <Route path='/companies/:handle' element={<CompanyDetail />} />

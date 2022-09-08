@@ -2,6 +2,11 @@ import { BrowserRouter } from "react-router-dom";
 import NavBar from "./NavBar";
 import RoutesList from "./RoutesList";
 import './App.css';
+import userContext from "./userContext";
+import {useState} from "react";
+import {JoblyApi} from "./api";
+
+const jwt = require("jsonwebtoken");
 
 /** App Component
  *
@@ -11,13 +16,31 @@ import './App.css';
 
 function App() {
 
+
+  const[user, setUser] = useState(null);
+  const[token, setToken] = useState(null);
+
+  async function handleSignup(formData){
+
+    const token = await JoblyApi.handleSignup(formData);
+    setToken(token);
+
+    const payload = jwt.decode(token);
+    setUser(payload);
+  }
+
+
+
   return (
-    <BrowserRouter>
-      <NavBar />
-      <div className="container">
-        <RoutesList />
-      </div>
-    </BrowserRouter>
+    <userContext.Provider value={{user,token}}>
+      <BrowserRouter>
+        <NavBar />
+        <div className="container">
+          <RoutesList handleSignup={handleSignup} />
+        </div>
+      </BrowserRouter>
+    </userContext.Provider>
+
   );
 }
 
