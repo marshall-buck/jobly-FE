@@ -1,6 +1,6 @@
-import {Navigate} from "react-router-dom";
-import {useContext, useState} from "react";
-import userContext from "./userContext";
+import { Navigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import userContext from '../userContext';
 
 
 /** EditProfile
@@ -21,18 +21,18 @@ import userContext from "./userContext";
 */
 
 
-function EditProfile({handleProfileEdit}){
+function EditProfile({ handleProfileEdit }) {
 
   const { user } = useContext(userContext);
   const [formData, setFormData] = useState(null);
 
   //TODO: does !user cover everything needed
-    if (!user) {
-      return <Navigate to="/" />;
-    } else {
-      const {username, firstName, lastName, email} = user;
-      setFormData({username, firstName, lastName, email});
-    }
+  if (!user) {
+    return <Navigate to="/" />;
+  } else {
+    const { username, firstName, lastName, email } = user;
+    setFormData({ username, firstName, lastName, email });
+  }
 
 
 

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 /** Login
 *
 * Props
@@ -10,13 +10,13 @@ import {useState} from 'react';
 *
 * App -> RoutesList => Login
 */
+const initialState = {
+  username: "",
+  password: ""
+};
 
-function Login({handleLogin}){
+function Login({ handleLogin }) {
 
-  const initialState = {
-    username: "",
-    password: ""
-  }
 
   const [formData, setFormData] = useState(initialState);
 
