@@ -21,7 +21,7 @@ import userContext from './userContext';
  */
 
 function RoutesList({ handleSignup, handleLogin, handleEditForm }) {
-  const { token } = useContext(userContext);
+  const { user } = useContext(userContext);
 
   return (
     <Routes>
@@ -29,7 +29,7 @@ function RoutesList({ handleSignup, handleLogin, handleEditForm }) {
       <Route path='/login' element={<Login handleLogin={handleLogin} />} />
       <Route path='/signup' element={<Signup handleSignup={handleSignup} />} />
 
-      { token && <>
+      { user && <>
       <Route path='/profile' element={<EditProfile handleEditForm={handleEditForm}/>} />
       <Route path='/companies' element={<CompaniesList />} />
       <Route path='/companies/:handle' element={<CompanyDetail />} />
@@ -41,3 +41,4 @@ function RoutesList({ handleSignup, handleLogin, handleEditForm }) {
 }
 
 export default RoutesList;
+

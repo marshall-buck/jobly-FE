@@ -110,3 +110,28 @@ function App() {
 }
 
 export default App;
+
+
+/**
+ * assumptions, we are logged in and at the route "/companies"
+ *
+ * step 1) press refresh button and resets app state
+ *        (token is not cleared from local storage)
+ *
+ *  - we run the function app, user state is null, you will have token +
+ *    token state
+ *
+ * STEP 2) APP is rendered without a user, so when we hit return statement we fail
+ * the conditional statement for user routes and route to the catch all root route.
+ *
+ * Step 3) Root route is rendered.
+ *
+ * Step 4) We are now mounting and useEffect is triggered, decoding token from
+ * local storage and hydrating the state with user info.
+ *
+ * Step 5) Because useEffect is changing state, the page is re-rendered and
+ * because we are on the landing page, it is not populated with the user info.
+ *
+ *
+ *
+ */
