@@ -77,7 +77,7 @@ function App() {
   */
   function handleLogout() {
     setToken(null);
-    setUser(null);
+    setUser({ data: null, isLoading: true });
     JoblyApi.token = null;
     localStorage.removeItem('token');
   }

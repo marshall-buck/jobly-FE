@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import userContext from './userContext';
-import { Link } from 'react-router-dom';
+
 
 
 /**
@@ -15,11 +15,8 @@ function LandingPage() {
   return (
     <div>
       <h1>Welcome to the Jungle</h1>
-      {user
-        ? <p> Welcome back: {user.firstName}</p>
-        : <div> <Link to='/login'>Log In</Link>
-          <Link to='/signup'>Sign Up</Link>
-        </div>
+      {user && <p> Welcome back: {user.firstName}</p>
+
       }
 
     </div>
