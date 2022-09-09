@@ -26,9 +26,10 @@ function App() {
       if (token) {
         JoblyApi.token = token;
         const payload = jwt_decode(token);
-        const user = await JoblyApi.getUserData(payload.username);
+        const response = await JoblyApi.getUserData(payload.username);
+        console.log("response from getUserData in useEffect in App",response);
 
-        setUser(user);
+        setUser(response);
 
       }
       else {
@@ -65,9 +66,9 @@ function App() {
   }
 
   async function handleEditForm(formData) {
-    const user = await JoblyApi.handleEditForm(formData);
-    setUser(user.user);
-    console.log('user from app', user);
+    const response = await JoblyApi.handleEditForm(formData);
+    setUser(response);
+    console.log("response from handleEditForm in App",response);
   }
 
 

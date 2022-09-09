@@ -117,9 +117,9 @@ class JoblyApi {
 
     const res = await this.request(
       `users/${username}`, { firstName, lastName, email }, 'PATCH');
-      console.log('response',res);
+      // console.log('response from handleEditForm in api',res);
 
-      return res;
+      return res.user;
   }
 
 

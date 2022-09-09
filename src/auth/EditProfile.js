@@ -24,7 +24,7 @@ import userContext from '../userContext';
 function EditProfile({ handleEditForm }) {
 
   const { user } = useContext(userContext);
-  // console.log(user);
+  // console.log("user", user);
   // const { username, firstName, lastName, email } = user;
 
   const [formData, setFormData] = useState(user);
@@ -44,7 +44,7 @@ function EditProfile({ handleEditForm }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     await handleEditForm(formData);
-    // TODO: setFormData(initialState);
+    // setFormData(() => user);
   }
 
   return (
