@@ -78,8 +78,8 @@ function App() {
   function handleLogout() {
     setToken(null);
     setUser(null);
+    JoblyApi.token = null;
     localStorage.removeItem('token');
-    //FIXME: Do we need to set the joblyapi class token to nothing.
   }
 
 /**
@@ -94,7 +94,15 @@ function App() {
     // console.log("response from handleEditForm in App",response);
   }
 
+  /**
+   * waiting for user data to hydrate
+   */
+  if (!user) {
+    return(
+      <p>Loading...</p>
+    )
 
+  }
 
   return (
     <userContext.Provider value={{ user, token }}>
@@ -129,8 +137,8 @@ export default App;
  * Step 4) We are now mounting and useEffect is triggered, decoding token from
  * local storage and hydrating the state with user info.
  *
- * Step 5) Because useEffect is changing state, the page is re-rendered and
- * because we are on the landing page, it is not populated with the user info.
+ * Step 5) Because useEffect is changing state, the component is re-rendered and
+ * because we are on the landing ge, it is now populated with the user info.
  *
  *
  *
