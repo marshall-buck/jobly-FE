@@ -16,12 +16,12 @@ import jwt_decode from "jwt-decode";
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ data: null, isLoading: true });
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-/**
- *  Checks for token and hydrates user on load and when token is changed.
- */
+  /**
+   *  Checks for token and hydrates user on load and when token is changed.
+   */
   useEffect(function checkIfToken() {
 
     async function checkLocalStorage() {
@@ -29,13 +29,13 @@ function App() {
         JoblyApi.token = token;
         const payload = jwt_decode(token);
         const response = await JoblyApi.getUserData(payload.username);
-        console.log("response from getUserData in useEffect in App",response);
+        console.log("response from getUserData in useEffect in App", response);
 
-        setUser(response);
+        setUser({ data: response, isLoading: false });
 
       }
       else {
-        setUser(null);
+        setUser({ data: null, isLoading: false });
       }
 
     }
@@ -44,12 +44,12 @@ function App() {
 
 
 
-/**
- * Handles user signup and sets token to Local Storage
- *
- * formData:
-* { username, password, firstName, lastName, email}
- */
+  /**
+   * Handles user signup and sets token to Local Storage
+   *
+   * formData:
+  * { username, password, firstName, lastName, email}
+   */
   async function handleSignup(formData) {
 
     const token = await JoblyApi.handleSignup(formData);
@@ -58,12 +58,12 @@ function App() {
 
   }
 
-/**
- * Handles user login and sets token to Local Storage
- *
- * formData:
- * { username, password}
-*/
+  /**
+   * Handles user login and sets token to Local Storage
+   *
+   * formData:
+   * { username, password}
+  */
   async function handleLogin(formData) {
 
     const token = await JoblyApi.loginUserApi(formData);
@@ -71,10 +71,10 @@ function App() {
     localStorage.setItem('token', token);
   }
 
- /**
- * Clears state, token and local storage
- *
- */
+  /**
+  * Clears state, token and local storage
+  *
+  */
   function handleLogout() {
     setToken(null);
     setUser(null);
@@ -82,12 +82,12 @@ function App() {
     localStorage.removeItem('token');
   }
 
-/**
- * Updates state with new user info
- *
- * formData:
- * { firstName,lastName,email}
-*/
+  /**
+   * Updates state with new user info
+   *
+   * formData:
+   * { firstName,lastName,email}
+  */
   async function handleEditForm(formData) {
     const response = await JoblyApi.handleEditForm(formData);
     setUser(response);
@@ -97,19 +97,20 @@ function App() {
   /**
    * waiting for user data to hydrate
    */
-  if (!user) {
-    return(
-      <p>Loading...</p>
-    )
 
+
+  if (user.isLoading) {
+    return (
+      <p>Loading...</p>
+    );
   }
 
   return (
-    <userContext.Provider value={{ user, token }}>
+    <userContext.Provider value={{ user: user.data, token }}>
       <BrowserRouter>
         <NavBar handleLogout={handleLogout} />
         <div className="container">
-          <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} handleEditForm={handleEditForm}/>
+          <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} handleEditForm={handleEditForm} />
         </div>
       </BrowserRouter>
     </userContext.Provider>
