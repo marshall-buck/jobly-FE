@@ -19,7 +19,9 @@ function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-
+/**
+ *  Checks for token and hydrates user on load and when token is changed.
+ */
   useEffect(function checkIfToken() {
 
     async function checkLocalStorage() {
@@ -42,7 +44,12 @@ function App() {
 
 
 
-
+/**
+ * Handles user signup and sets token to Local Storage
+ *
+ * formData:
+* { username, password, firstName, lastName, email}
+ */
   async function handleSignup(formData) {
 
     const token = await JoblyApi.handleSignup(formData);
@@ -51,6 +58,12 @@ function App() {
 
   }
 
+/**
+ * Handles user login and sets token to Local Storage
+ *
+ * formData:
+ * { username, password}
+*/
   async function handleLogin(formData) {
 
     const token = await JoblyApi.loginUserApi(formData);
@@ -58,17 +71,27 @@ function App() {
     localStorage.setItem('token', token);
   }
 
+ /**
+ * Clears state, token and local storage
+ *
+ */
   function handleLogout() {
     setToken(null);
     setUser(null);
     localStorage.removeItem('token');
-
+    //FIXME: Do we need to set the joblyapi class token to nothing.
   }
 
+/**
+ * Updates state with new user info
+ *
+ * formData:
+ * { firstName,lastName,email}
+*/
   async function handleEditForm(formData) {
     const response = await JoblyApi.handleEditForm(formData);
     setUser(response);
-    console.log("response from handleEditForm in App",response);
+    // console.log("response from handleEditForm in App",response);
   }
 
 
