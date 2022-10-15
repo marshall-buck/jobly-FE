@@ -1,39 +1,43 @@
-// import { Navigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import userContext from '../userContext';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FormSignupUser, User } from '../interfaces';
 
+interface SignupPropsInterface {
+  handleSignup: (formData: User) =>  Promise<void>
+}
 
-/** EditProfile
+/** Signup
 *
 * Props
-* - handleProfileEdit
+* - handleSignup
 *
 * State
-* -formData {
-  "username": "JohnDoe",
+* -formData { "username": "JohnDoe",
+ "password": "password",
  "firstName": "John",
  "lastName": "Doe",
  "email" : "e@mail.com"
 }
 *
 *
-* App -> RoutesList => EditProfile
+* App -> RoutesList => Signup
 */
 
+const initialState = {
+  username: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  email: ""
+};
+function Signup({ handleSignup }: SignupPropsInterface)  {
 
-function EditProfile({ handleEditForm }) {
 
-  const { user } = useContext(userContext);
-  // console.log("user", user);
-  // const { username, firstName, lastName, email } = user;
-
-  const [formData, setFormData] = useState(user);
-
-  // setFormData({ username, firstName, lastName, email });
-
+  const [formData, setFormData] = useState<FormSignupUser>(initialState);
+  const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
-  function handleChange(evt) {
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement >) {
     const { name, value } = evt.target;
     setFormData(fData => ({
       ...fData,
@@ -41,14 +45,15 @@ function EditProfile({ handleEditForm }) {
     }));
   }
 
-  async function handleSubmit(evt) {
+  async function handleSubmitSignup(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    await handleEditForm(formData);
-    // setFormData(() => user);
+    await handleSignup(formData);
+    setFormData(initialState);
+    navigate("/companies");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitSignup}>
       <label htmlFor="username">Username:</label>
       <input
         type="text"
@@ -56,9 +61,18 @@ function EditProfile({ handleEditForm }) {
         name="username"
         value={formData.username}
         onChange={handleChange}
-        disabled
+        required
       />
 
+      <label htmlFor="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
       <label htmlFor="firstName">First Name:</label>
       <input
         type="text"
@@ -68,7 +82,6 @@ function EditProfile({ handleEditForm }) {
         onChange={handleChange}
         required
       />
-
       <label htmlFor="lastName">Last Name:</label>
       <input
         type="text"
@@ -87,11 +100,11 @@ function EditProfile({ handleEditForm }) {
         onChange={handleChange}
         required
       />
-      <button>Save Changes</button>
+      <button>Signup</button>
     </form>
 
   );
 
 }
 
-export default EditProfile;
+export default Signup;

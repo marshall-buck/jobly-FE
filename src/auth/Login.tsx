@@ -1,5 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FormLoginUser } from '../interfaces';
+
+
+interface LoginPropsInterface {
+  handleLogin: (formData: FormLoginUser) => Promise<void>
+}
+
+
 /** Login
 *
 * Props
@@ -11,18 +19,18 @@ import { useNavigate } from 'react-router-dom';
 *
 * App -> RoutesList => Login
 */
-const initialState = {
+const initialState: FormLoginUser = {
   username: "",
   password: ""
 };
 
-function Login({ handleLogin }) {
+function Login({ handleLogin }: LoginPropsInterface) {
 
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState<FormLoginUser>(initialState);
   const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
-  function handleChange(evt) {
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement >) {
     const { name, value } = evt.target;
     setFormData(fData => ({
       ...fData,
@@ -30,7 +38,7 @@ function Login({ handleLogin }) {
     }));
   }
 
-  async function handleSubmit(evt) {
+  async function handleLoginSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     await handleLogin(formData);
     setFormData(initialState);
@@ -38,7 +46,7 @@ function Login({ handleLogin }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleLoginSubmit}>
       <label htmlFor="username">Username:</label>
       <input
         type="text"

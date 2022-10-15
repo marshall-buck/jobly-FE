@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import JoblyApi from '../api';
 import CompanyCard from './CompanyCard';
 import SearchBar from '../SearchBar';
+import { Company } from '../interfaces';
 
 
 
@@ -16,11 +17,11 @@ import SearchBar from '../SearchBar';
  */
 
 function CompaniesList() {
-  const [companies, setCompanies] = useState({ data: null, isLoading: true });
+  const [companies, setCompanies] = useState<{data: Company[] | null, isLoading: boolean}>({ data: null, isLoading: true });
 
   useEffect(function fetchCompaniesOnLoad() {
     async function fetchCompanies() {
-      const companiesResults = await JoblyApi.getCompanies();
+      const companiesResults = await JoblyApi.getCompanies(null);
       setCompanies({
         data: companiesResults,
         isLoading: false
@@ -32,7 +33,7 @@ function CompaniesList() {
 
 
   /** handle submit of form set new state */
-  async function handleSearch(term) {
+  async function handleSearch(term: string) {
 
     setCompanies({ ...companies, isLoading: true });
     const companiesResults = await JoblyApi.getCompanies(term);
@@ -48,7 +49,7 @@ function CompaniesList() {
       <h1>Companies List</h1>
       <SearchBar handleSearch={handleSearch} />
 
-      {companies.data.map(c => (
+      {companies?.data?.map(c => (
 
         <CompanyCard key={c.handle}
           name={c.name}

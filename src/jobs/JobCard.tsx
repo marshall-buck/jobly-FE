@@ -8,7 +8,9 @@
  * App => RoutesList => JobList => JobCard
  */
 
-function JobCard({ title, salary, equity, companyName }) {
+import { Job } from "../interfaces";
+
+function JobCard({title, salary, equity, companyName }: Omit<Job, "id">) {
 
 
   return (

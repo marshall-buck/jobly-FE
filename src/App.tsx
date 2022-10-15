@@ -1,11 +1,17 @@
 import { BrowserRouter } from "react-router-dom";
-import NavBar from "./NavBar";
-import RoutesList from "./RoutesList";
-import './App.css';
-import userContext from "./userContext";
+import NavBar from "./navigation/NavBar";
+import RoutesList from "./navigation/RoutesList";
+
+import UserContext from "./userContext";
 import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
+import { FormEditUser, FormLoginUser, FormSignupUser, TokenPayload, User } from "./interfaces";
+
+interface UserStateInterface {
+  data: User | null
+  isLoading?: boolean;
+}
 
 
 /** App Component
@@ -16,8 +22,8 @@ import jwt_decode from "jwt-decode";
 
 function App() {
 
-  const [user, setUser] = useState({ data: null, isLoading: true });
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [user, setUser] = useState<UserStateInterface>({ data: null, isLoading: true });
+  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
   /**
    *  Checks for token and hydrates user on load and when token is changed.
@@ -27,9 +33,8 @@ function App() {
     async function checkLocalStorage() {
       if (token) {
         JoblyApi.token = token;
-        const payload = jwt_decode(token);
+        const payload: TokenPayload = jwt_decode(token);
         const response = await JoblyApi.getUserData(payload.username);
-        console.log("response from getUserData in useEffect in App", response);
 
         setUser({ data: response, isLoading: false });
 
@@ -50,7 +55,7 @@ function App() {
    * formData:
   * { username, password, firstName, lastName, email}
    */
-  async function handleSignup(formData) {
+  async function handleSignup(formData: FormSignupUser): Promise<void> {
 
     const token = await JoblyApi.handleSignup(formData);
     setToken(token);
@@ -64,7 +69,7 @@ function App() {
    * formData:
    * { username, password}
   */
-  async function handleLogin(formData) {
+  async function handleLogin(formData: FormLoginUser): Promise<void> {
 
     const token = await JoblyApi.loginUserApi(formData);
     setToken(token);
@@ -88,10 +93,14 @@ function App() {
    * formData:
    * { firstName,lastName,email}
   */
-  async function handleEditForm(formData) {
+  async function handleEditForm(formData: FormEditUser): Promise<void> {
     const response = await JoblyApi.handleEditForm(formData);
-    setUser(response);
-    // console.log("response from handleEditForm in App",response);
+    setUser((user) => {
+        return {
+          ...user,
+          data: response
+        }
+    });
   }
 
   /**
@@ -106,41 +115,16 @@ function App() {
   }
 
   return (
-    <userContext.Provider value={{ user: user.data, token }}>
+    <UserContext.Provider value={{ user: user.data, token }}>
       <BrowserRouter>
         <NavBar handleLogout={handleLogout} />
         <div className="container">
           <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} handleEditForm={handleEditForm} />
         </div>
       </BrowserRouter>
-    </userContext.Provider>
+    </UserContext.Provider>
 
   );
 }
 
 export default App;
-
-
-/**
- * assumptions, we are logged in and at the route "/companies"
- *
- * step 1) press refresh button and resets app state
- *        (token is not cleared from local storage)
- *
- *  - we run the function app, user state is null, you will have token +
- *    token state
- *
- * STEP 2) APP is rendered without a user, so when we hit return statement we fail
- * the conditional statement for user routes and route to the catch all root route.
- *
- * Step 3) Root route is rendered.
- *
- * Step 4) We are now mounting and useEffect is triggered, decoding token from
- * local storage and hydrating the state with user info.
- *
- * Step 5) Because useEffect is changing state, the component is re-rendered and
- * because we are on the landing ge, it is now populated with the user info.
- *
- *
- *
- */

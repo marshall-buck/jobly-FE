@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Company } from "../interfaces";
 /**
  * CompanyCard
  *
@@ -8,7 +9,7 @@ import { Link } from "react-router-dom";
  * App => RoutesList => CompaniesList => CompanyCard
  */
 
-function CompanyCard({ handle, name, description, logoUrl }) {
+function CompanyCard({ handle, name, description, logoUrl }: Company) {
 
 
   return (

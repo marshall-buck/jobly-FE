@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import "./NavBar.css";
+
 import { useContext } from 'react';
-import userContext from './userContext';
+import UserContext from '../userContext';
 
 /**
  *
@@ -11,12 +11,12 @@ import userContext from './userContext';
 //App -> NavBar -> NavLink
 
 function NavBar({ handleLogout }) {
-  const { user } = useContext(userContext);
+  const { user } = useContext(UserContext);
 
 
 
 
-  return (<div className="NavBar">
+  return (<div>
     <NavLink to='/'>Jobly</NavLink>
 
     {user && <>  <NavLink to='/companies'>Companies</NavLink>

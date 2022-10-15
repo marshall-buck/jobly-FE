@@ -1,5 +1,7 @@
 import { useContext } from 'react';
-import userContext from './userContext';
+import UserContext from './userContext';
+
+
 
 
 
@@ -11,7 +13,8 @@ import userContext from './userContext';
 
 function LandingPage() {
 
-  const { user } = useContext(userContext);
+  const { user } = useContext(UserContext);
+
   return (
     <div>
       <h1>Welcome to the Jungle</h1>

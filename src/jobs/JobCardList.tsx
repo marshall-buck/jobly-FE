@@ -1,3 +1,4 @@
+import { Jobs } from "../interfaces";
 import JobCard from "./JobCard";
 /**
  *  JobCardList
@@ -9,16 +10,16 @@ import JobCard from "./JobCard";
  *
 */
 
-function JobCardList({ jobs }) {
+function JobCardList({ jobs }: Jobs) {
 
 
 
   return (
     <div>
-      {jobs.map(j => (
+      {jobs?.map(j => (
 
 
-        <JobCard key={j.id} title={j.title}
+        <JobCard key={j.id}  title={j.title}
           salary={j.salary}
           equity={j.equity}
           companyName={j.companyName} />
