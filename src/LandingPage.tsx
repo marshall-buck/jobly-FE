@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import UserContext from './UserContext';
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import coverImage from "./images/pexels-karolina-grabowska-4207909.jpg";
 
-
-
-
+import UserContext from "./UserContext";
 
 /**
  * Landing Page
@@ -12,51 +11,40 @@ import UserContext from './UserContext';
  */
 
 function LandingPage() {
-
   const { user } = useContext(UserContext);
 
   return (
-    <div className="hero min-h-screen bg-base-200">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Login now!</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-    </div>
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div className="card-body">
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input type="text" placeholder="email" className="input input-bordered" />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Password</span>
-          </label>
-          <input type="text" placeholder="password" className="input input-bordered" />
-          <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-          </label>
-        </div>
-        <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+    <div
+      className="hero min-h-screen bg-base-200"
+      style={{ backgroundImage: `url(${coverImage})` }}
+    >
+      <div className="hero-overlay bg-opacity-80 ">
+        <div className="hero-content flex-col  min-h-screen m-auto">
+          <div className="text-center">
+            {user && <h1 className="text-3xl lg:text-5xl font-bold"> Welcome back to your job search {user.firstName}</h1>}
+            {!user && (
+              <div className="text-center">
+                <h1 className="text-5xl font-bold">
+                  Welcome to the job search!
+                </h1>
+                <p className="py-6">
+                  Login to start your job search, or sign up for new account.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  <Link to={"/login"}>
+                    <button className="btn btn-secondary w-40">Login</button>
+                  </Link>
+                  <Link to={"/signup"}>
+                    <button className="btn btn-primary w-40">Sign Up</button>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-    // <div>
-    //   <h1 className="text-9xl">Welcome to the Jungle</h1>
-    //   {user && <p> Welcome back: {user.firstName}</p>
-
-    //   }
-
-    // </div>
-
-
   );
 }
-
 
 export default LandingPage;

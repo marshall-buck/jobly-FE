@@ -1,38 +1,35 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FormLoginUser } from '../interfaces';
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FormLoginUser } from "../interfaces";
 
 interface LoginPropsInterface {
-  handleLogin: (formData: FormLoginUser) => Promise<void>
+  handleLogin: (formData: FormLoginUser) => Promise<void>;
 }
 
-
 /** Login
-*
-* Props
-* - handleLogin
-*
-* State
-* -formData { username: "", password: ""}
-*
-*
-* App -> RoutesList => Login
-*/
+ *
+ * Props
+ * - handleLogin
+ *
+ * State
+ * -formData { username: "", password: ""}
+ *
+ *
+ * App -> RoutesList => Login
+ */
 const initialState: FormLoginUser = {
   username: "",
-  password: ""
+  password: "",
 };
 
 function Login({ handleLogin }: LoginPropsInterface) {
-
   const [formData, setFormData] = useState<FormLoginUser>(initialState);
   const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
-  function handleChange(evt: React.ChangeEvent<HTMLInputElement >) {
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = evt.target;
-    setFormData(fData => ({
+    setFormData((fData) => ({
       ...fData,
       [name]: value,
     }));
@@ -46,8 +43,46 @@ function Login({ handleLogin }: LoginPropsInterface) {
   }
 
   return (
-    <form onSubmit={handleLoginSubmit}>
-      <label htmlFor="username">Username:</label>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <form
+        className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+        onSubmit={handleLoginSubmit}
+      >
+        <div className="card-body">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control mt-6">
+            <button className="btn btn-primary">Login</button>
+          </div>
+        </div>
+
+        {/* <label htmlFor="username">Username:</label>
       <input
         type="text"
         id="username"
@@ -66,11 +101,10 @@ function Login({ handleLogin }: LoginPropsInterface) {
         onChange={handleChange}
         required
       />
-      <button>Login</button>
-    </form>
-
+      <button>Login</button> */}
+      </form>
+    </div>
   );
-
 }
 
 export default Login;
