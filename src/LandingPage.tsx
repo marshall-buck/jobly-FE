@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import coverImage from "./images/pexels-karolina-grabowska-4207909.jpg";
 
-import UserContext from "./UserContext";
+import UserContext from "./auth/UserContext";
 
 /**
  * Landing Page

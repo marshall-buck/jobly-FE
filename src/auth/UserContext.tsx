@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { UserContextInterface } from "./interfaces";
+import { UserContextInterface } from "../interfaces";
 
 
 const UserContext = createContext<UserContextInterface>({user: null, token: null});
