@@ -15,7 +15,6 @@ interface NavBarPropsInterface {
 //App -> NavBar -> NavLink
 
 function NavBar({ handleLogout }: NavBarPropsInterface) {
-  const { user } = useContext(UserContext);
 
   return (
     <div className="w-full navbar bg-base-300">

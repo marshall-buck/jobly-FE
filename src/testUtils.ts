@@ -16,7 +16,7 @@ const user: User = {
 }
 
 
-const userCtx= {
+const userCtx: UserContextInterface = {
   user: user,
   token: token
 }

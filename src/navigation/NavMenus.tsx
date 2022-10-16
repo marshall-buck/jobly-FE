@@ -30,7 +30,7 @@ function NavMenu({ handleLogout }: NavBarPropsInterface) {
               </li>
               <li>
                 <Link to="/" onClick={handleLogout}>
-                  Log out {user.firstName}
+                  Log Out {user.firstName}
                 </Link>
               </li>
             </>
