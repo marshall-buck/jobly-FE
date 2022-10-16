@@ -36,39 +36,10 @@ function NavBar({ handleLogout }: NavBarPropsInterface) {
           </svg>
         </label>
       </div>
-      <div className="flex-1 px-2 mx-2">Jobly</div>
+      <Link to="/" className="flex-1 px-2 mx-2">Jobly</Link>
       <div className="flex-none hidden md:block">
         <ul className="menu menu-horizontal">
             <NavMenu handleLogout={handleLogout}/>
-
-        {/* {user && (
-          <>
-            <li>
-              <Link to="/companies">Companies</Link>
-            </li>
-            <li>
-              <Link to="/jobs">Jobs</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/" onClick={handleLogout}>
-                Log out {user.firstName}
-              </Link>
-            </li>
-          </>
-        )}
-        {!user && (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-          </>
-        )} */}
       </ul>
       </div>
     </div>

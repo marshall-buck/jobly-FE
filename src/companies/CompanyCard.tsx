@@ -13,14 +13,20 @@ function CompanyCard({ handle, name, description, logoUrl }: Company) {
 
 
   return (
-    <Link to={`/companies/${handle}`} className="CompanyCard">
-      <div >
-        <h2>{name}</h2>
-        <p>{description}</p>
-        {logoUrl && <img src={logoUrl} alt={name}></img>}
 
-      </div>
-    </Link>
+     <div className="card md:card-side bg-base-100 shadow-xl ">
+  <figure><img className="w-[200px]" src={logoUrl ? logoUrl : "/logos/logo3.png"} alt="Movie"/></figure>
+  <div className="card-body">
+    <h2 className="card-title">{name}</h2>
+    <p>{description}</p>
+    <div className="card-actions justify-end">
+    <Link to={`/companies/${handle}`}>
+      <button className="btn btn-secondary btn-circle">Go</button>
+      </Link>
+    </div>
+  </div>
+</div>
+
   );
 }
 

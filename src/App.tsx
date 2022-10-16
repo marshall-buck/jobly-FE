@@ -131,7 +131,7 @@ function App() {
             <NavBar handleLogout={handleLogout} />
 
             {/* <!-- Page content here --> */}
-            <div>
+            <div className="bg-base-300">
               <RoutesList
                 handleSignup={handleSignup}
                 handleLogin={handleLogin}
