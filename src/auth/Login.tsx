@@ -81,27 +81,6 @@ function Login({ handleLogin }: LoginPropsInterface) {
             <button className="btn btn-primary">Login</button>
           </div>
         </div>
-
-        {/* <label htmlFor="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        required
-      />
-
-      <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
-      <button>Login</button> */}
       </form>
     </div>
   );

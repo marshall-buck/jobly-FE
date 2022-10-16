@@ -18,7 +18,7 @@ function LandingPage() {
       className="hero min-h-screen bg-base-200"
       style={{ backgroundImage: `url(${coverImage})` }}
     >
-      <div className="hero-overlay bg-opacity-80 ">
+      <div className="hero-overlay bg-opacity-90">
         <div className="hero-content flex-col  min-h-screen m-auto">
           <div className="text-center">
             {user && <h1 className="text-3xl lg:text-5xl font-bold"> Welcome back to your job search {user.firstName}</h1>}

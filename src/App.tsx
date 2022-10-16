@@ -2,19 +2,23 @@ import { BrowserRouter } from "react-router-dom";
 import NavBar from "./navigation/NavBar";
 import RoutesList from "./navigation/RoutesList";
 
-
 import UserContext from "./UserContext";
 import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
-import { FormEditUser, FormLoginUser, FormSignupUser, TokenPayload, User } from "./interfaces";
-
+import {
+  FormEditUser,
+  FormLoginUser,
+  FormSignupUser,
+  TokenPayload,
+  User,
+} from "./interfaces";
+import NavMenu from "./navigation/NavMenus";
 
 interface UserStateInterface {
-  data: User | null
+  data: User | null;
   isLoading?: boolean;
 }
-
 
 /** App Component
  *
@@ -23,54 +27,52 @@ interface UserStateInterface {
  */
 
 function App() {
-
-  const [user, setUser] = useState<UserStateInterface>({ data: null, isLoading: true });
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  const [user, setUser] = useState<UserStateInterface>({
+    data: null,
+    isLoading: true,
+  });
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem("token")
+  );
 
   /**
    *  Checks for token and hydrates user on load and when token is changed.
    */
-  useEffect(function checkIfToken() {
+  useEffect(
+    function checkIfToken() {
+      async function checkLocalStorage() {
+        if (token) {
+          try {
+            JoblyApi.token = token;
+            const payload: TokenPayload = jwt_decode(token);
+            const response = await JoblyApi.getUserData(payload.username);
 
-    async function checkLocalStorage() {
-      if (token) {
-        try {
-          JoblyApi.token = token;
-          const payload: TokenPayload = jwt_decode(token);
-          const response = await JoblyApi.getUserData(payload.username);
-
-          setUser({ data: response, isLoading: false });
-        } catch(err) {
-          console.error("App loadUserInfo: problem loading", err);
-          // TODO:Alert to log in again
-          setToken(null)
+            setUser({ data: response, isLoading: false });
+          } catch (err) {
+            console.error("App loadUserInfo: problem loading", err);
+            // TODO:Alert to log in again
+            setToken(null);
+            setUser({ data: null, isLoading: false });
+          }
+        } else {
           setUser({ data: null, isLoading: false });
         }
-
-
       }
-      else {
-        setUser({ data: null, isLoading: false });
-      }
-
-    }
-    checkLocalStorage();
-  }, [token]);
-
-
+      checkLocalStorage();
+    },
+    [token]
+  );
 
   /**
    * Handles user signup and sets token to Local Storage
    *
    * formData:
-  * { username, password, firstName, lastName, email}
+   * { username, password, firstName, lastName, email}
    */
   async function handleSignup(formData: FormSignupUser): Promise<void> {
-
     const token = await JoblyApi.handleSignup(formData);
     setToken(token);
-    localStorage.setItem('token', token);
-
+    localStorage.setItem("token", token);
   }
 
   /**
@@ -78,23 +80,22 @@ function App() {
    *
    * formData:
    * { username, password}
-  */
+   */
   async function handleLogin(formData: FormLoginUser): Promise<void> {
-
     const token = await JoblyApi.loginUserApi(formData);
     setToken(token);
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   }
 
   /**
-  * Clears state, token and local storage
-  *
-  */
-  function handleLogout():void {
+   * Clears state, token and local storage
+   *
+   */
+  function handleLogout(): void {
     setToken(null);
     setUser({ data: null, isLoading: true });
     JoblyApi.token = null;
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   }
 
   /**
@@ -102,14 +103,14 @@ function App() {
    *
    * formData:
    * { firstName,lastName,email}
-  */
+   */
   async function handleEditForm(formData: FormEditUser): Promise<void> {
     const response = await JoblyApi.handleEditForm(formData);
     setUser((user) => {
-        return {
-          ...user,
-          data: response
-        }
+      return {
+        ...user,
+        data: response,
+      };
     });
   }
 
@@ -117,23 +118,37 @@ function App() {
    * waiting for user data to hydrate
    */
 
-
   if (user.isLoading) {
-    return (
-      <p>Loading...</p>
-    );
+    return <p>Loading...</p>;
   }
 
   return (
     <UserContext.Provider value={{ user: user.data, token }}>
       <BrowserRouter>
-        <NavBar handleLogout={handleLogout} />
-        <div>
-          <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} handleEditForm={handleEditForm} />
+        <div className="drawer">
+          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content flex flex-col">
+            <NavBar handleLogout={handleLogout} />
+
+            {/* <!-- Page content here --> */}
+            <div>
+              <RoutesList
+                handleSignup={handleSignup}
+                handleLogin={handleLogin}
+                handleEditForm={handleEditForm}
+              />
+            </div>
+          </div>
+          <div className="drawer-side">
+            <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+            <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
+              {/* <!-- Sidebar content here --> */}
+              <NavMenu handleLogout={handleLogout} />
+            </ul>
+          </div>
         </div>
       </BrowserRouter>
     </UserContext.Provider>
-
   );
 }
 
