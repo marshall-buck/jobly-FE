@@ -1,5 +1,9 @@
-import { Jobs } from "../interfaces";
+import { Job } from "../interfaces";
 import JobCard from "./JobCard";
+
+interface JobCardListPropsInterface {
+  jobs: Job[] | null | undefined
+}
 /**
  *  JobCardList
  *
@@ -10,13 +14,13 @@ import JobCard from "./JobCard";
  *
 */
 
-function JobCardList({ jobs }: Jobs) {
+function JobCardList({ jobs }:JobCardListPropsInterface) {
 
 
 
   return (
     <div>
-      {jobs?.map(j => (
+      {jobs?.map((j) => (
 
 
         <JobCard key={j.id}  title={j.title}

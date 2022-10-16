@@ -18,9 +18,9 @@ type Company = {
   handle: string;
   name: string;
   description: string;
-  numEmployees: number;
+  numEmployees?: number;
   logoUrl: string;
-  jobs?: Omit<Job[], "companyName">
+  jobs?: Job[]
 };
 
 interface Jobs {

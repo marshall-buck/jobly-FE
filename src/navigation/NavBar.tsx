@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 
 import { useContext } from 'react';
 import UserContext from '../userContext';
+interface NavBarPropsInterface {
+  handleLogout: () => void
+}
 
 /**
  *
@@ -10,7 +13,7 @@ import UserContext from '../userContext';
  */
 //App -> NavBar -> NavLink
 
-function NavBar({ handleLogout }) {
+function NavBar({ handleLogout }: NavBarPropsInterface) {
   const { user } = useContext(UserContext);
 
 

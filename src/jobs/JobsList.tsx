@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from '../api';
 import JobCardList from "./JobCardList";
-import SearchBar from '../SearchBar';
-import { Job, Jobs } from '../interfaces';
+import SearchBar from '../navigation/SearchBar';
+import { Job } from '../interfaces';
 
 
 /**

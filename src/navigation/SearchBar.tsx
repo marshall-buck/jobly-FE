@@ -1,5 +1,9 @@
 import { useState } from 'react';
 
+interface SearchBarPropsInterface {
+  handleSearch: (term: string) => void
+}
+
 /** searchBar
  *
  * Props
@@ -13,15 +17,15 @@ import { useState } from 'react';
  * (JobsList, CompaniesList) -> SearchBar
  */
 
-function SearchBar({ handleSearch }) {
+function SearchBar({ handleSearch }:SearchBarPropsInterface) {
   const [term, setTerm] = useState("");
 
 
-  function handleChange(evt) {
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement>) : void {
     setTerm(evt.target.value);
   }
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     handleSearch(term);
     setTerm("");

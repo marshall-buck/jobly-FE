@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from '../api';
 import CompanyCard from './CompanyCard';
-import SearchBar from '../SearchBar';
+import SearchBar from '../navigation/SearchBar';
 import { Company } from '../interfaces';
 
 
@@ -33,7 +33,7 @@ function CompaniesList() {
 
 
   /** handle submit of form set new state */
-  async function handleSearch(term: string) {
+  async function handleSearch(term: Company["name"]): Promise<void> {
 
     setCompanies({ ...companies, isLoading: true });
     const companiesResults = await JoblyApi.getCompanies(term);

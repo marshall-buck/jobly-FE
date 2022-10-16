@@ -80,7 +80,7 @@ function App() {
   * Clears state, token and local storage
   *
   */
-  function handleLogout() {
+  function handleLogout():void {
     setToken(null);
     setUser({ data: null, isLoading: true });
     JoblyApi.token = null;
