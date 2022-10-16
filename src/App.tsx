@@ -127,11 +127,11 @@ function App() {
       <BrowserRouter>
         <div className="drawer">
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col">
+          <div className="drawer-content flex flex-col bg-base-300">
             <NavBar handleLogout={handleLogout} />
 
             {/* <!-- Page content here --> */}
-            <div className="bg-base-300">
+            <div >
               <RoutesList
                 handleSignup={handleSignup}
                 handleLogin={handleLogin}

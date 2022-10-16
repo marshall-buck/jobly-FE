@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
-import JoblyApi from '../api';
+import { useState, useEffect } from "react";
+import JoblyApi from "../api";
 import JobCardList from "./JobCardList";
-import SearchBar from '../navigation/SearchBar';
-import { Job } from '../interfaces';
-
+import SearchBar from "../navigation/SearchBar";
+import { Job } from "../interfaces";
 
 /**
  * Jobs List
@@ -16,42 +15,38 @@ import { Job } from '../interfaces';
  */
 
 function JobsList() {
-  const [jobs, setJobs] = useState<{data: Job[] | null, isLoading:boolean}>({ data: null, isLoading: true });
+  const [jobs, setJobs] = useState<{ data: Job[] | null; isLoading: boolean }>({
+    data: null,
+    isLoading: true,
+  });
 
-
-  useEffect(() =>  {
+  useEffect(() => {
     async function fetchJobs() {
       const jobsResults = await JoblyApi.getJobs(null);
       setJobs({
         data: jobsResults,
-        isLoading: false
+        isLoading: false,
       });
     }
     fetchJobs();
   }, []);
 
-
   /** handle submit of form set new state */
   async function handleSearch(term: string) {
-
     setJobs({ ...jobs, isLoading: true });
     const jobsResults = await JoblyApi.getJobs(term);
     setJobs({ data: jobsResults, isLoading: false });
-
   }
-
 
   if (jobs.isLoading) return <i>Loading...</i>;
 
   return (
-    <div>
-      <h1>Jobs List</h1>
+    <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto" >
+      <h1 className="text-3xl font-bold text-center">Jobs List</h1>
       <SearchBar handleSearch={handleSearch} />
       <JobCardList jobs={jobs.data} />
     </div>
-
   );
 }
-
 
 export default JobsList;

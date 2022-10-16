@@ -21,10 +21,10 @@ function LandingPage() {
       <div className="hero-overlay bg-opacity-90">
         <div className="hero-content flex-col  min-h-screen m-auto">
           <div className="text-center">
-            {user && <h1 className="text-3xl lg:text-5xl font-bold"> Welcome back to your job search {user.firstName}</h1>}
+            {user && <h1 className="text-3xl lg:text-5xl font-bold text-primary-content"> Welcome back to your job search {user.firstName}</h1>}
             {!user && (
               <div className="text-center">
-                <h1 className="text-5xl font-bold">
+                <h1 className="text-5xl font-bold text-primary-content">
                   Welcome to the job search!
                 </h1>
                 <p className="py-6">

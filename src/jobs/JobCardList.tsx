@@ -19,17 +19,16 @@ function JobCardList({ jobs }:JobCardListPropsInterface) {
 
 
   return (
-    <div>
+    <>
       {jobs?.map((j) => (
-
-
         <JobCard key={j.id}  title={j.title}
           salary={j.salary}
           equity={j.equity}
-          companyName={j.companyName} />
+          companyName={j.companyName}
+          companyHandle={j.companyHandle} />
 
       ))}
-    </div>
+    </>
   );
 }
 

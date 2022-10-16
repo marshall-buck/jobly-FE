@@ -33,6 +33,7 @@ type Job = {
   salary: number;
   equity: string;
   companyName: string;
+  companyHandle:string;
 };
 
 

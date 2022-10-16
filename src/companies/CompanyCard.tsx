@@ -14,8 +14,8 @@ function CompanyCard({ handle, name, description, logoUrl }: Company) {
 
   return (
 
-     <div className="card md:card-side bg-base-100 shadow-xl ">
-  <figure><img className="w-[200px]" src={logoUrl ? logoUrl : "/logos/logo3.png"} alt="Movie"/></figure>
+     <div className="card md:card-side bg-base-100 shadow-xl px-4 pt-4">
+  <figure><img className="w-[200px]  rounded-lg" src={logoUrl ? logoUrl : "/logos/logo3.png"} alt="Movie"/></figure>
   <div className="card-body">
     <h2 className="card-title">{name}</h2>
     <p>{description}</p>

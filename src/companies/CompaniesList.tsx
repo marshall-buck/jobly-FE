@@ -42,7 +42,7 @@ function CompaniesList() {
   return (
 
 
-      <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch">
+      <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto">
       <h1 className="text-3xl font-bold text-center">Companies List</h1>
       <SearchBar handleSearch={handleSearch} />
         {companies?.data?.map((c) => (
