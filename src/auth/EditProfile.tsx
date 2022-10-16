@@ -55,48 +55,89 @@ function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        disabled
-      />
 
-      <label htmlFor="firstName">First Name:</label>
-      <input
-        type="text"
-        id="firstName"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-        required
-      />
-
-      <label htmlFor="lastName">Last Name:</label>
-      <input
-        type="text"
-        id="lastName"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-        required
-      />
-      <label htmlFor="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-      <button>Save Changes</button>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+    <form
+      className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+      onSubmit={handleSubmit}
+    >
+      <div className="card-body">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Username</span>
+          </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            disabled
+            className="input input-bordered"
+          />
+        </div>
+        {/* <div className="form-control">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="input input-bordered"
+          />
+        </div> */}
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">First Name</span>
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+            className="input input-bordered"
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Last Name</span>
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+            className="input input-bordered"
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="input input-bordered"
+          />
+        </div>
+        <div className="form-control mt-6">
+          <button className="btn btn-primary">Submit</button>
+        </div>
+      </div>
     </form>
-
+  </div>
   );
 
 }
