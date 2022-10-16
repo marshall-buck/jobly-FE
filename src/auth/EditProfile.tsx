@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { FormEditUser } from "../interfaces";
 
 
-import UserContext from '../userContext';
+import UserContext from '../UserContext';
 
 
 

@@ -8,7 +8,7 @@ import Login from "../auth/Login";
 import Signup from "../auth/Signup";
 import EditProfile from "../auth/EditProfile";
 import { useContext } from "react";
-import UserContext from "../userContext";
+import UserContext from "../UserContext";
 import { FormEditUser, FormLoginUser, FormSignupUser } from "../interfaces";
 
 interface RoutesListPropsInterface {

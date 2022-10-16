@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 import { useContext } from 'react';
-import UserContext from '../userContext';
+import UserContext from '../UserContext';
 interface NavBarPropsInterface {
   handleLogout: () => void
 }

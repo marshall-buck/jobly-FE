@@ -2,11 +2,13 @@ import { BrowserRouter } from "react-router-dom";
 import NavBar from "./navigation/NavBar";
 import RoutesList from "./navigation/RoutesList";
 
-import UserContext from "./userContext";
+
+import UserContext from "./UserContext";
 import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 import { FormEditUser, FormLoginUser, FormSignupUser, TokenPayload, User } from "./interfaces";
+
 
 interface UserStateInterface {
   data: User | null
@@ -32,11 +34,19 @@ function App() {
 
     async function checkLocalStorage() {
       if (token) {
-        JoblyApi.token = token;
-        const payload: TokenPayload = jwt_decode(token);
-        const response = await JoblyApi.getUserData(payload.username);
+        try {
+          JoblyApi.token = token;
+          const payload: TokenPayload = jwt_decode(token);
+          const response = await JoblyApi.getUserData(payload.username);
 
-        setUser({ data: response, isLoading: false });
+          setUser({ data: response, isLoading: false });
+        } catch(err) {
+          console.error("App loadUserInfo: problem loading", err);
+          // TODO:Alert to log in again
+          setToken(null)
+          setUser({ data: null, isLoading: false });
+        }
+
 
       }
       else {
@@ -118,7 +128,7 @@ function App() {
     <UserContext.Provider value={{ user: user.data, token }}>
       <BrowserRouter>
         <NavBar handleLogout={handleLogout} />
-        <div className="container">
+        <div>
           <RoutesList handleSignup={handleSignup} handleLogin={handleLogin} handleEditForm={handleEditForm} />
         </div>
       </BrowserRouter>
