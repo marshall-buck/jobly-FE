@@ -139,6 +139,7 @@ function App() {
               />
             </div>
           </div>
+          {/* TODO: extract */}
           <div className="drawer-side">
             <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
             <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">

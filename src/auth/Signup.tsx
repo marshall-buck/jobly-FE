@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FormSignupUser, User } from '../interfaces';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FormSignupUser, User } from "../interfaces";
 
 interface SignupPropsInterface {
-  handleSignup: (formData: User) =>  Promise<void>
+  handleSignup: (formData: User) => Promise<void>;
 }
 
 /** Signup
@@ -28,18 +28,16 @@ const initialState = {
   password: "",
   firstName: "",
   lastName: "",
-  email: ""
+  email: "",
 };
-function Signup({ handleSignup }: SignupPropsInterface)  {
-
-
+function Signup({ handleSignup }: SignupPropsInterface) {
   const [formData, setFormData] = useState<FormSignupUser>(initialState);
   const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
-  function handleChange(evt: React.ChangeEvent<HTMLInputElement >) {
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = evt.target;
-    setFormData(fData => ({
+    setFormData((fData) => ({
       ...fData,
       [name]: value,
     }));
@@ -53,58 +51,89 @@ function Signup({ handleSignup }: SignupPropsInterface)  {
   }
 
   return (
-    <form onSubmit={handleSubmitSignup}>
-      <label htmlFor="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        required
-      />
-
-      <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
-      <label htmlFor="firstName">First Name:</label>
-      <input
-        type="text"
-        id="firstName"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-        required
-      />
-      <label htmlFor="lastName">Last Name:</label>
-      <input
-        type="text"
-        id="lastName"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-        required
-      />
-      <label htmlFor="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-      <button>Signup</button>
-    </form>
-
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <form
+        className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+        onSubmit={handleSubmitSignup}
+      >
+        <div className="card-body">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Username</span>
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">First Name</span>
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Last Name</span>
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control mt-6">
+            <button className="btn btn-primary">Sign Up</button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
-
 }
 
 export default Signup;
