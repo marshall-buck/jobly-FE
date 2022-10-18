@@ -1,8 +1,8 @@
-import { Company, Job, User, UserContextInterface } from "./interfaces";
+import { Company, Job, User, UserContextInterface, FormSignupUser } from "./interfaces";
 
 const token: string | null = "long string";
 
-const user: User = {
+const user: User | FormSignupUser = {
   username: "jets test",
   password: "123456",
   firstName: "jest first",
@@ -61,52 +61,61 @@ const companies: Company[] = [
   },
 ];
 
-const company: Company = {
-
+const filteredResults: Omit<Company, "companyHandle" | "companyName">[] = [
+  {
     handle: "anderson-arias-morrow",
     name: "Anderson, Arias and Morrow",
     description:
       "Somebody program how I. Face give away discussion view act inside. Your official relationship administration here.",
     numEmployees: 245,
     logoUrl: "/logos/logo3.png",
-    jobs: [
-      {
-        id: 7,
-        title: "Technical brewer",
-        salary: 157000,
-        equity: "0",
-      },
-      {
-        id: 18,
-        title: "Embryologist, clinical",
-        salary: 138000,
-        equity: "0",
-      },
-      {
-        id: 62,
-        title: "Art gallery manager",
-        salary: null,
-        equity: "0.085",
-      },
-      {
-        id: 95,
-        title: "Writer",
-        salary: 172000,
-        equity: "0.091",
-      },
-      {
-        id: 119,
-        title: "Oceanographer",
-        salary: null,
-        equity: "0.097",
-      },
-      {
-        id: 127,
-        title: "Glass blower/designer",
-        salary: 126000,
-        equity: "0.099",
-      },
-    ],
-  }
+  },
+];
+const company: Company = {
+  handle: "anderson-arias-morrow",
+  name: "Anderson, Arias and Morrow",
+  description:
+    "Somebody program how I. Face give away discussion view act inside. Your official relationship administration here.",
+  numEmployees: 245,
+  logoUrl: "/logos/logo3.png",
+  jobs: [
+    {
+      id: 7,
+      title: "Technical brewer",
+      salary: 157000,
+      equity: "0",
+    },
+    {
+      id: 18,
+      title: "Embryologist, clinical",
+      salary: 138000,
+      equity: "0",
+    },
+    {
+      id: 62,
+      title: "Art gallery manager",
+      salary: null,
+      equity: "0.085",
+    },
+    {
+      id: 95,
+      title: "Writer",
+      salary: 172000,
+      equity: "0.091",
+    },
+    {
+      id: 119,
+      title: "Oceanographer",
+      salary: null,
+      equity: "0.097",
+    },
+    {
+      id: 127,
+      title: "Glass blower/designer",
+      salary: 126000,
+      equity: "0.099",
+    },
+  ],
+};
 
-export { userCtx, jobs, companies, company };
+export { userCtx, jobs, companies, company , filteredResults, user};
