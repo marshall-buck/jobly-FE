@@ -20,6 +20,7 @@ function JobCardList({ jobs }:JobCardListPropsInterface) {
 
   return (
     <>
+
       {jobs?.map((j) => (
         <JobCard key={j.id}  title={j.title}
           salary={j.salary}

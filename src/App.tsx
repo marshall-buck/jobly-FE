@@ -123,9 +123,9 @@ function App() {
   }
 
   return (
-    <UserContext.Provider value={{ user: user.data, token }}>
-      <BrowserRouter>
-        <div className="drawer">
+    <UserContext.Provider  value={{ user: user.data, token }}>
+      <BrowserRouter >
+        <div className="drawer" >
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col bg-base-300">
             <NavBar handleLogout={handleLogout} />

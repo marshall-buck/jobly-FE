@@ -14,26 +14,25 @@ type FormEditUser = Omit<User, "password" | "isAdmin">;
 
 type FormSignupUser =  Omit<User, "isAdmin">
 
+
 type Company = {
   handle: string;
   name: string;
   description: string;
   numEmployees?: number;
-  logoUrl: string;
+  logoUrl: string | null
   jobs?: Job[]
 };
 
-interface Jobs {
-  jobs: Job[] | null
-}
+
 
 type Job = {
   id: number;
   title: string;
-  salary: number;
-  equity: string;
-  companyName: string;
-  companyHandle:string;
+  salary: number | null
+  equity: string
+  companyName?: string;
+  companyHandle?:string;
 };
 
 
@@ -61,7 +60,7 @@ export type {
   FormEditUser,
   Company,
   Job,
-  Jobs,
+
   FormSignupUser,
 
 };
