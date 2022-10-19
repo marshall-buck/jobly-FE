@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import NavBar from "./navigation/NavBar";
 import RoutesList from "./navigation/RoutesList";
 
-import UserContext from "./auth/UserContext";
+import UserContext from "./context/UserContext";
 import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";

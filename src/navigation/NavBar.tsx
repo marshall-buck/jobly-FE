@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-
-import { useContext } from "react";
-import UserContext from "../auth/UserContext";
 import NavMenu from "./NavMenus";
 interface NavBarPropsInterface {
   handleLogout: () => void;

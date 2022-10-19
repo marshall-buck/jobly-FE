@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from "../Alert";
 import { FormLoginUser } from "../interfaces";
 
 interface LoginPropsInterface {
@@ -24,6 +25,7 @@ const initialState: FormLoginUser = {
 
 function Login({ handleLogin }: LoginPropsInterface) {
   const [formData, setFormData] = useState<FormLoginUser>(initialState);
+  const [formErrors, setFormErrors] = useState([]);
   const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
@@ -37,9 +39,15 @@ function Login({ handleLogin }: LoginPropsInterface) {
 
   async function handleLoginSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    await handleLogin(formData);
+    try {
+      await handleLogin(formData);
     setFormData(initialState);
     navigate("/companies");
+    } catch (err:any) {
+      setFormErrors(err);
+    }
+
+
   }
 
   return (
@@ -51,7 +59,7 @@ function Login({ handleLogin }: LoginPropsInterface) {
         <div className="card-body">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text">Username</span>
             </label>
             <input
               type="text"
@@ -77,6 +85,11 @@ function Login({ handleLogin }: LoginPropsInterface) {
               className="input input-bordered"
             />
           </div>
+
+          {formErrors.length
+                ? <Alert resetFormErrors={setFormErrors} type="error" messages={formErrors} />
+                : null
+              }
           <div className="form-control mt-6">
             <button className="btn btn-primary">Login</button>
           </div>

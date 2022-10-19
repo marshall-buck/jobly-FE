@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import LandingPage from "../LandingPage";
 import CompaniesList from "../companies/CompaniesList";
@@ -8,7 +7,7 @@ import Login from "../auth/Login";
 import Signup from "../auth/Signup";
 import EditProfile from "../auth/EditProfile";
 import { useContext } from "react";
-import UserContext from "../auth/UserContext";
+import UserContext from "../context/UserContext";
 import { FormEditUser, FormLoginUser, FormSignupUser } from "../interfaces";
 
 interface RoutesListPropsInterface {

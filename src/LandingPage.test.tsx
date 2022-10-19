@@ -3,7 +3,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import LandingPage from "./LandingPage";
-import UserContext from './auth/UserContext'
+import UserContext from './context/UserContext'
 import { userCtx } from "./testUtils";
 
 

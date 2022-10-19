@@ -1,9 +1,16 @@
-import { Company, Job, User, UserContextInterface, FormSignupUser } from "./interfaces";
+import {
+  Company,
+  Job,
+  User,
+  UserContextInterface,
+  FormSignupUser,
+  FormEditUser,
+} from "./interfaces";
 
 const token: string | null = "long string";
 
 const user: User | FormSignupUser = {
-  username: "jets test",
+  username: "jetstest",
   password: "123456",
   firstName: "jest first",
   lastName: "jest last",
@@ -60,6 +67,8 @@ const companies: Company[] = [
     logoUrl: null,
   },
 ];
+
+const editUser: FormEditUser = {username: "testuser" ,firstName: "John", lastName: "Doe", email: "1@1.com" };
 
 const filteredResults: Omit<Company, "companyHandle" | "companyName">[] = [
   {
@@ -118,4 +127,4 @@ const company: Company = {
   ],
 };
 
-export { userCtx, jobs, companies, company , filteredResults, user};
+export { userCtx, jobs, companies, company, filteredResults, user, editUser };
