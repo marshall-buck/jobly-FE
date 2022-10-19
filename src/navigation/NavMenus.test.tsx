@@ -6,9 +6,8 @@ import NavMenus from "./NavMenus";
 import UserContext from '../context/UserContext'
 import { userCtx } from "../testUtils";
 
-
-
-it("Display name when logged in", function () {
+describe("Tests Nav menus", () => {
+  it("Display name when logged in", function () {
     function handleLogout() {
         expect(true).toBe(true);
       }
@@ -49,3 +48,6 @@ it("Display name when logged in", function () {
     expect(screen.getByText("Login")).toBeInTheDocument();
     expect(screen.getByText(/Sign Up/)).toBeInTheDocument();
   });
+
+})
+

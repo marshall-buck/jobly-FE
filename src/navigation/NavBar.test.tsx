@@ -6,8 +6,8 @@ import NavBar from "./NavBar";
 import UserContext from '../context/UserContext'
 import { userCtx } from "../testUtils";
 
-
-it("Display name when logged in", function () {
+describe("Navbar Tests" ,() => {
+  it("Display name when logged in", function () {
     const { asFragment } = render(
         <MemoryRouter>
           <UserContext.Provider value={{user: userCtx.user, token: userCtx.token}}>
@@ -35,3 +35,8 @@ it("Display name when logged in", function () {
     expect(screen.getByText("Login")).toBeInTheDocument();
     expect(screen.getByText(/Sign Up/)).toBeInTheDocument();
   });
+
+})
+
+
+
