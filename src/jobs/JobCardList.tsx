@@ -2,7 +2,7 @@ import { Job } from "../interfaces";
 import JobCard from "./JobCard";
 
 interface JobCardListPropsInterface {
-  jobs: Job[] | null | undefined
+  jobs: Job[] | null | undefined;
 }
 /**
  *  JobCardList
@@ -12,24 +12,22 @@ interface JobCardListPropsInterface {
  *
  *  App => RoutesList => JobsList => JobCardList => JobCard
  *
-*/
+ */
 
-function JobCardList({ jobs }:JobCardListPropsInterface) {
-
-
-
+function JobCardList({ jobs }: JobCardListPropsInterface) {
   return (
-    <>
-
+    <div className="flex flex-row flex-wrap gap-4">
       {jobs?.map((j) => (
-        <JobCard key={j.id}  title={j.title}
+        <JobCard
+          key={j.id}
+          title={j.title}
           salary={j.salary}
           equity={j.equity}
           companyName={j.companyName}
-          companyHandle={j.companyHandle} />
-
+          companyHandle={j.companyHandle}
+        />
       ))}
-    </>
+    </div>
   );
 }
 

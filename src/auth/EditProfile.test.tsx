@@ -2,16 +2,16 @@ import { fireEvent, render, screen, configure } from "@testing-library/react";
 import EditProfile from "./EditProfile";
 import { editUser, userCtx } from "../testUtils";
 import UserContext from "../context/UserContext";
-import {} from "../testUtils";
+
 import { MemoryRouter } from "react-router-dom";
 
 configure({ testIdAttribute: "data-cy" });
 
-const editUserMock = jest.fn((cb) => cb(userCtx));
+const editUserMock = jest.fn();
 
 describe("Tests EditProfile", () => {
   it("matches snapshot", function () {
-    const { asFragment, debug } = render(
+    const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
           value={{ user: userCtx.user, token: userCtx.token }}
@@ -22,28 +22,69 @@ describe("Tests EditProfile", () => {
     );
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it("populates form with data", function () {
+    render(
+      <MemoryRouter>
+        <UserContext.Provider
+          value={{ user: userCtx.user, token: userCtx.token }}
+        >
+          <EditProfile handleEditForm={editUserMock} />
+        </UserContext.Provider>
+      </MemoryRouter>
+    );
+
+    const username = screen.getByRole("textbox", {
+      name: /username/i,
+    }) as HTMLElement;
+    const firstName = screen.getByRole("textbox", {
+      name: /first Name/i,
+    }) as HTMLElement;
+    const lastName = screen.getByRole("textbox", {
+      name: /last Name/i,
+    }) as HTMLElement;
+    const email = screen.getByRole("textbox", {
+      name: /email/i,
+    }) as HTMLElement;
+
+    expect(username).toHaveAttribute("disabled");
+    expect(lastName).toHaveValue(userCtx.user?.lastName);
+    expect(firstName).toHaveValue(userCtx.user?.firstName);
+    expect(email).toHaveValue(userCtx.user?.email);
+  });
+
+  it("submits correct data", function () {
+    render(
+      <MemoryRouter>
+        <UserContext.Provider
+          value={{ user: userCtx.user, token: userCtx.token }}
+        >
+          <EditProfile handleEditForm={editUserMock} />
+        </UserContext.Provider>
+      </MemoryRouter>
+    );
+
+    const form = screen.queryByTestId("edit-user-form") as HTMLFormElement;
+    const firstName = screen.getByRole("textbox", {
+      name: /first Name/i,
+    }) as HTMLElement;
+    const lastName = screen.getByRole("textbox", {
+      name: /last Name/i,
+    }) as HTMLElement;
+    const email = screen.getByRole("textbox", {
+      name: /email/i,
+    }) as HTMLElement;
+
+    fireEvent.change(firstName, { target: { value: editUser.firstName } });
+    fireEvent.change(lastName, { target: { value: editUser.lastName } });
+    fireEvent.change(email, { target: { value: editUser.email } });
+
+    fireEvent.submit(form);
+
+    expect(lastName).toHaveValue(editUser.lastName);
+    expect(firstName).toHaveValue(editUser.firstName);
+    expect(email).toHaveValue(editUser.email);
+
+    expect(editUserMock).toHaveBeenCalledWith(editUser);
+  });
 });
-
-//   const handleSearch = jest.fn()
-// render(<SearchBar handleSearch={handleSearch} />);
-//     const form = screen.queryByTestId('search-bar-form') as Element
-//     const input = screen.queryByTestId('search-bar-input') as Element
-//     const button = screen.queryByTestId('search-bar-button')  as Element
-//     fireEvent.change(input, {target: {value: ''}})
-//     expect(input).toHaveValue("")
-
-//     fireEvent.change(input, {target: {value: 'form submit'}})
-//     expect(input).toHaveValue("form submit")
-//     fireEvent.submit(form)
-//     expect(handleSearch).toHaveBeenCalledWith("form submit")
-
-//     fireEvent.change(input, {target: {value: 'button click'}})
-//     fireEvent.click(button)
-
-//     expect(handleSearch).toHaveBeenCalledWith("button click")
-
-//     fireEvent.change(input, {target: {value: 'enter key'}})
-
-//     fireEvent.submit(form, { key: 'Enter', charCode: 13 });
-
-//     expect(handleSearch).toHaveBeenCalledWith("enter key")

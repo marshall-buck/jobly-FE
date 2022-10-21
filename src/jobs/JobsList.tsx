@@ -41,9 +41,10 @@ function JobsList() {
   if (jobs.isLoading) return <i>Loading...</i>;
 
   return (
-    <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto" >
+    <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto">
       <h1 className="text-3xl font-bold text-center">Jobs List</h1>
       <SearchBar handleSearch={handleSearch} />
+
       <JobCardList jobs={jobs.data} />
     </div>
   );

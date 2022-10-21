@@ -10,7 +10,7 @@ import {
 const token: string | null = "long string";
 
 const user: User | FormSignupUser = {
-  username: "jetstest",
+  username: "testuser",
   password: "123456",
   firstName: "jest first",
   lastName: "jest last",
@@ -68,7 +68,13 @@ const companies: Company[] = [
   },
 ];
 
-const editUser: FormEditUser = {username: "testuser" ,firstName: "John", lastName: "Doe", email: "1@1.com" };
+const editUser: FormEditUser = {
+  username: "testuser",
+  firstName: "John",
+  lastName: "Doe",
+  email: "1@1.com",
+  password: "123456",
+};
 
 const filteredResults: Omit<Company, "companyHandle" | "companyName">[] = [
   {

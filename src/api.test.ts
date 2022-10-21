@@ -11,7 +11,6 @@ import {
 } from "./testUtils";
 import MockAdapter from "axios-mock-adapter";
 
-
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const axiosMock: MockAdapter = new MockAdapter(axios);
 
@@ -66,7 +65,7 @@ describe("Tests api calls", () => {
   });
 
   it("gets user data", async () => {
-    axiosMock.onGet(`${BASE_URL}/users/jetstest`).reply(200, { user });
+    axiosMock.onGet(`${BASE_URL}/users/testuser`).reply(200, { user });
     const res = await JoblyApi.getUserData(user.username);
     expect(res).toEqual(user);
   });
@@ -82,7 +81,6 @@ describe("Tests api calls", () => {
   //   });
   //   const res =await JoblyApi.getJobs(null);
   //     expect(res).rejects()
-
 
   // });
 });
