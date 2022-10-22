@@ -44,7 +44,7 @@ function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
       [name]: value,
     }));
   }
-
+  // TODO: try catch
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     await handleEditForm(formData);

@@ -41,24 +41,23 @@ function Login({ handleLogin }: LoginPropsInterface) {
     evt.preventDefault();
     try {
       await handleLogin(formData);
-    setFormData(initialState);
-    navigate("/companies");
-    } catch (err:any) {
+      setFormData(initialState);
+      navigate("/companies");
+    } catch (err: any) {
       setFormErrors(err);
     }
-
-
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form
+        data-cy="login-form"
         className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
         onSubmit={handleLoginSubmit}
       >
         <div className="card-body">
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="username">
               <span className="label-text">Username</span>
             </label>
             <input
@@ -72,7 +71,7 @@ function Login({ handleLogin }: LoginPropsInterface) {
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="password">
               <span className="label-text">Password</span>
             </label>
             <input
@@ -86,10 +85,13 @@ function Login({ handleLogin }: LoginPropsInterface) {
             />
           </div>
 
-          {formErrors.length
-                ? <Alert resetFormErrors={setFormErrors} type="error" messages={formErrors} />
-                : null
-              }
+          {formErrors.length ? (
+            <Alert
+              resetFormErrors={setFormErrors}
+              type="error"
+              messages={formErrors}
+            />
+          ) : null}
           <div className="form-control mt-6">
             <button className="btn btn-primary">Login</button>
           </div>

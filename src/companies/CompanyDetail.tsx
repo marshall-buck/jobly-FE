@@ -37,12 +37,10 @@ function CompanyDetail() {
 
   return (
     <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto">
-      <h1 className="card-title text-4xl text-primary-content">
-        {company?.data?.name}
-      </h1>
+      <h1 className="card-title text-4xl ">{company?.data?.name}</h1>
       <p>{company.data?.description}</p>
 
-      <h2 className="text-2xl text-primary-content">Available Jobs</h2>
+      <h2 className="text-2xl ">Available Jobs</h2>
 
       <JobCardList jobs={company?.data?.jobs} />
     </div>

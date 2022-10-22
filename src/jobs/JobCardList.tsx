@@ -16,7 +16,7 @@ interface JobCardListPropsInterface {
 
 function JobCardList({ jobs }: JobCardListPropsInterface) {
   return (
-    <div className="flex flex-row flex-wrap gap-4">
+    <div className="flex flex-row flex-wrap justify-center md:justify-around gap-4">
       {jobs?.map((j) => (
         <JobCard
           key={j.id}

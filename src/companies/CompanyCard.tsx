@@ -11,12 +11,12 @@ import { Company } from "../interfaces";
 
 function CompanyCard({ handle, name, description, logoUrl }: Company) {
   return (
-    <div className="card md:card-side bg-base-100 shadow-xl px-4 pt-4">
+    <div className="card md:card-side bg-base-100 shadow-xl px-4 pt-4 lg:w-2/3">
       <figure>
         <img
-          className="w-[200px]  rounded-lg"
-          src={logoUrl ? logoUrl : "/logos/logo3.png"}
-          alt="Movie"
+          className="w-[200px] rounded-lg"
+          src={logoUrl ?? "/logos/logo3.png"}
+          alt="company-logo"
         />
       </figure>
       <div className="card-body">
