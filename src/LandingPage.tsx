@@ -21,13 +21,18 @@ function LandingPage() {
       <div className="hero-overlay bg-opacity-80">
         <div className="hero-content flex-col  min-h-screen m-auto">
           <div className="text-center">
-            {user && <h1 className="text-3xl lg:text-5xl font-bold text-primary-content"> Welcome back to your job search {user.firstName}</h1>}
+            {user && (
+              <h1 className="text-3xl lg:text-5xl font-bold text-primary-content">
+                {" "}
+                Welcome back to your job search {user.firstName}
+              </h1>
+            )}
             {!user && (
               <div className="text-center">
                 <h1 className="text-5xl font-bold text-primary-content">
                   Welcome to the job search!
                 </h1>
-                <p className="py-6">
+                <p className="py-6 text-primary-content">
                   Login to start your job search, or sign up for new account.
                 </p>
                 <div className="grid grid-cols-2 gap-4">

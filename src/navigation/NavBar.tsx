@@ -13,9 +13,9 @@ interface NavBarPropsInterface {
 
 function NavBar({ handleLogout }: NavBarPropsInterface) {
   return (
-    <div className="w-full navbar">
+    <header className="navbar container mx-auto">
       <div className="flex-none md:hidden">
-        <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
+        <label htmlFor="my-drawer" className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -39,7 +39,7 @@ function NavBar({ handleLogout }: NavBarPropsInterface) {
           <NavMenu handleLogout={handleLogout} />
         </ul>
       </div>
-    </div>
+    </header>
   );
 }
 

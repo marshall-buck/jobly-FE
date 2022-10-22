@@ -126,7 +126,7 @@ function App() {
     <UserContext.Provider value={{ user: user.data, token }}>
       <BrowserRouter>
         <div className="drawer" data-theme="light">
-          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col bg-base-300">
             <NavBar handleLogout={handleLogout} />
 
@@ -141,7 +141,7 @@ function App() {
           </div>
           {/* TODO: extract */}
           <div className="drawer-side">
-            <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+            <label htmlFor="my-drawer" className="drawer-overlay"></label>
             <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
               {/* <!-- Sidebar content here --> */}
               <NavMenu handleLogout={handleLogout} />
