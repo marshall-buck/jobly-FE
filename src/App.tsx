@@ -39,12 +39,12 @@ function App() {
    *  Checks for token and hydrates user on load and when token is changed.
    */
   useEffect(
-    function checkIfToken() {
-      async function checkLocalStorage() {
+    function loadUserInfo() {
+      async function getCurrentUser() {
         if (token) {
           try {
-            JoblyApi.token = token;
             const payload: TokenPayload = jwt_decode(token);
+            JoblyApi.token = token;
             const response = await JoblyApi.getUserData(payload.username);
 
             setUser({ data: response, isLoading: false });
@@ -58,7 +58,7 @@ function App() {
           setUser({ data: null, isLoading: false });
         }
       }
-      checkLocalStorage();
+      getCurrentUser();
     },
     [token]
   );
@@ -93,7 +93,7 @@ function App() {
    */
   function handleLogout(): void {
     setToken(null);
-    setUser({ data: null, isLoading: true });
+    setUser({ data: null, isLoading: false });
     JoblyApi.token = null;
     localStorage.removeItem("token");
   }
@@ -119,7 +119,11 @@ function App() {
    */
 
   if (user.isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <p className="text-4xl text-black">Loading...</p>;
+      </div>
+    );
   }
 
   return (

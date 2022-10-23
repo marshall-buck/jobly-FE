@@ -13,7 +13,7 @@ import { FormEditUser, FormLoginUser, FormSignupUser } from "../interfaces";
 interface RoutesListPropsInterface {
   handleSignup: (formData: FormSignupUser) => Promise<void>;
   handleLogin: (formData: FormLoginUser) => Promise<void>;
-  handleEditForm: (formData: FormEditUser) => Promise<void>
+  handleEditForm: (formData: FormEditUser) => Promise<void>;
 }
 
 /**
@@ -29,12 +29,19 @@ function RoutesList({
   handleEditForm,
 }: RoutesListPropsInterface) {
   const { user } = useContext(UserContext);
-
+  //TODO Fix:routing bug
   return (
     <Routes>
+      {!user && (
+        <>
+          <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+          <Route
+            path="/signup"
+            element={<Signup handleSignup={handleSignup} />}
+          />
+        </>
+      )}
       <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-      <Route path="/signup" element={<Signup handleSignup={handleSignup} />} />
 
       {user && (
         <>

@@ -41,7 +41,7 @@ function Login({ handleLogin }: LoginPropsInterface) {
     evt.preventDefault();
     try {
       await handleLogin(formData);
-      setFormData(initialState);
+      // setFormData(initialState);
       navigate("/companies");
     } catch (err: any) {
       setFormErrors(err);

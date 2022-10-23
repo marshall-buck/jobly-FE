@@ -1,10 +1,11 @@
 import React from "react";
 
 interface AlertPropsInterface {
-    type: string
-    messages?: string[]
-    resetFormErrors: React.Dispatch<React.SetStateAction<never[]>>| (() => never[])
-
+  type: string;
+  messages?: string[];
+  resetFormErrors:
+    | React.Dispatch<React.SetStateAction<never[]>>
+    | (() => never[]);
 }
 
 /** Presentational component for showing alerts.
@@ -12,17 +13,15 @@ interface AlertPropsInterface {
  * { LoginForm, SignupForm, ProfileForm } -> Alert
  **/
 
-function Alert({ type = "error", messages = [], resetFormErrors }: AlertPropsInterface) {
-  console.debug("Alert", "type=", type, "messages=", messages);
+function Alert({ type, messages = [], resetFormErrors }: AlertPropsInterface) {
+  console.debug("Alert", "type", type, "messages=", messages);
 
   function closeAlert() {
-    resetFormErrors([])
+    resetFormErrors([]);
   }
 
-
-
   return (
-    <div className={`alert alert-${type} shadow-lg`}>
+    <div className={`alert alert-error shadow-lg`}>
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,14 +41,12 @@ function Alert({ type = "error", messages = [], resetFormErrors }: AlertPropsInt
         ))}
       </div>
       <div className="flex-none">
-    <button onClick={closeAlert} className="btn btn-sm btn-ghost">Dismiss</button>
-
-  </div>
+        <button onClick={closeAlert} className="btn btn-sm btn-ghost">
+          Dismiss
+        </button>
+      </div>
     </div>
   );
 }
 
 export default Alert;
-
-
-
