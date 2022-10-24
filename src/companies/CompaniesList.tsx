@@ -3,6 +3,7 @@ import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import SearchBar from "../navigation/SearchBar";
 import { Company } from "../interfaces";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 /**
  * Companies List
@@ -37,7 +38,7 @@ function CompaniesList() {
     setCompanies({ data: companiesResults, isLoading: false });
   }
 
-  if (companies.isLoading) return <i>Loading...</i>;
+  if (companies.isLoading) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col gap-4 px-4 md:px-12  md:container justify-around mx-auto">

@@ -33,7 +33,7 @@ function CompanyDetail() {
     fetchCompanies();
   });
 
-  if (company.isLoading) return <i>Loading...</i>;
+  // if (company.isLoading) return <i>Loading...</i>;
 
   return (
     <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto">

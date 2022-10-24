@@ -1,6 +1,6 @@
 import NavBar from "./navigation/NavBar";
 import RoutesList from "./navigation/RoutesList";
-
+import LoadingSpinner from "./common/LoadingSpinner";
 import UserContext from "./context/UserContext";
 import { useState, useEffect } from "react";
 import JoblyApi from "./api";
@@ -13,7 +13,7 @@ import {
   User,
 } from "./interfaces";
 import NavMenu from "./navigation/NavMenus";
-// import { useNavigate } from "react-router-dom";
+import { LOADIPHLPAPI } from "dns";
 
 interface UserStateInterface {
   data: User | null;
@@ -42,6 +42,9 @@ function App() {
   useEffect(
     function loadUserInfo() {
       async function getCurrentUser() {
+        setUser((user) => {
+          return { ...user, isLoading: true };
+        });
         if (token) {
           try {
             const payload: TokenPayload = jwt_decode(token);
@@ -71,6 +74,9 @@ function App() {
    * { username, password, firstName, lastName, email}
    */
   async function handleSignup(formData: FormSignupUser): Promise<void> {
+    setUser((user) => {
+      return { ...user, isLoading: true };
+    });
     const token = await JoblyApi.handleSignup(formData);
     setToken(token);
     localStorage.setItem("token", token);
@@ -83,6 +89,9 @@ function App() {
    * { username, password}
    */
   async function handleLogin(formData: FormLoginUser): Promise<void> {
+    setUser((user) => {
+      return { ...user, isLoading: true };
+    });
     const token = await JoblyApi.loginUserApi(formData);
     setToken(token);
     localStorage.setItem("token", token);
@@ -121,11 +130,7 @@ function App() {
    */
 
   if (user.isLoading) {
-    return (
-      <div className="flex flex-col justify-center items-center min-h-screen">
-        <p className="text-4xl text-black">Loading...</p>;
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (

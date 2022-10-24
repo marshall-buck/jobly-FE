@@ -3,6 +3,7 @@ import JoblyApi from "../api";
 import JobCardList from "./JobCardList";
 import SearchBar from "../navigation/SearchBar";
 import { Job } from "../interfaces";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 /**
  * Jobs List
@@ -38,7 +39,7 @@ function JobsList() {
     setJobs({ data: jobsResults, isLoading: false });
   }
 
-  if (jobs.isLoading) return <i>Loading...</i>;
+  if (jobs.isLoading) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col gap-4 px-4 md:px-12  md:container  mx-auto">
