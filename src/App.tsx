@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import NavBar from "./navigation/NavBar";
 import RoutesList from "./navigation/RoutesList";
 
@@ -14,6 +13,7 @@ import {
   User,
 } from "./interfaces";
 import NavMenu from "./navigation/NavMenus";
+// import { useNavigate } from "react-router-dom";
 
 interface UserStateInterface {
   data: User | null;
@@ -27,6 +27,7 @@ interface UserStateInterface {
  */
 
 function App() {
+  // const navigate = useNavigate();
   const [user, setUser] = useState<UserStateInterface>({
     data: null,
     isLoading: true,
@@ -85,6 +86,7 @@ function App() {
     const token = await JoblyApi.loginUserApi(formData);
     setToken(token);
     localStorage.setItem("token", token);
+    // navigate("/companies");
   }
 
   /**

@@ -41,7 +41,6 @@ function RoutesList({
           />
         </>
       )}
-      <Route path="/" element={<LandingPage />} />
 
       {user && (
         <>
@@ -51,9 +50,11 @@ function RoutesList({
           />
           <Route path="/companies" element={<CompaniesList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
-          <Route path="/jobs" element={<JobsList />} />{" "}
+          <Route path="/jobs" element={<JobsList />} />
         </>
       )}
+
+      <Route path="/" element={<LandingPage />} />
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

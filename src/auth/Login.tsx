@@ -42,9 +42,10 @@ function Login({ handleLogin }: LoginPropsInterface) {
     try {
       await handleLogin(formData);
       // setFormData(initialState);
-      navigate("/companies");
     } catch (err: any) {
       setFormErrors(err);
+    } finally {
+      navigate("/companies");
     }
   }
 
