@@ -13,7 +13,6 @@ import {
   User,
 } from "./interfaces";
 import NavMenu from "./navigation/NavMenus";
-import { LOADIPHLPAPI } from "dns";
 
 interface UserStateInterface {
   data: User | null;
