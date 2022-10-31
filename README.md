@@ -1,8 +1,6 @@
 # jobly
 
-### React front end  that luse a backend job api
-
-
+### React front end  that uses a backend job api
 
 #### Tech Stack
 
@@ -22,10 +20,7 @@
 - users can search for jobs
 - properties won't double book
 
-
 ---
-
-
 
 [Live Site](https://jobly-fe.onrender.com/)
 
