@@ -1,38 +1,38 @@
-# Jobly Front End
+# jobly
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### React front end  that luse a backend job api
 
-Clone the repo
 
-`run npm i` to install dependencies
 
-## Available Scripts
+#### Tech Stack
 
-In the project directory, you can run:
 
-### `npm start`
+- React Front end
+- Typescript
+- React testing lib
+- Cypress
+- Tailwindcss
+- DaisyUi
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- users can register, login/out
+- protected auth routes
+- users can search for jobs
+- properties won't double book
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm coverage`
 
-Will run tests in coverage mode
 
-### `npm run build`
+[Live Site](https://jobly-fe.onrender.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### issues & todos:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [ ] Write Cypress Tests
+- [ ] finish integration tests
+- [ ] let users submit  and un-submit applications
+- [ ] add live search
+- [ ] let admin users edit company info
