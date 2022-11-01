@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import JoblyApi from "../api";
 import JobCardList from "../jobs/JobCardList";
 import { Company } from "../interfaces";
+import LoadingSpinner from "../common/LoadingSpinner";
+import Alert from "../common/Alert";
 
 /**
  * Company  Detail
@@ -21,19 +23,36 @@ function CompanyDetail() {
     isLoading: boolean;
   }>({ data: null, isLoading: true });
   const { handle } = useParams<Company["handle"]>();
+  const [errors, setErrors] = useState([]);
 
-  useEffect(function fetchCompaniesOnLoad() {
+  useEffect(() => {
     async function fetchCompanies() {
-      const companyResult = await JoblyApi.getCompanyByHandle(handle as string);
-      setCompany({
-        data: companyResult,
-        isLoading: false,
-      });
+      try {
+        const companyResult = await JoblyApi.getCompanyByHandle(
+          handle as string
+        );
+        setCompany({
+          data: companyResult,
+          isLoading: false,
+        });
+      } catch (err) {
+        setErrors([err] as never[]);
+        setCompany({
+          data: null,
+          isLoading: false,
+        });
+      }
     }
     fetchCompanies();
-  });
+  }, [handle]);
 
-  // if (company.isLoading) return <i>Loading...</i>;
+  /**
+   * waiting for user data to hydrate
+   */
+
+  if (company.isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto">
@@ -42,7 +61,13 @@ function CompanyDetail() {
 
       <h2 className="text-2xl ">Available Jobs</h2>
 
-      <JobCardList jobs={company?.data?.jobs} />
+      {errors.length ? (
+        <Alert resetErrors={setErrors} type="error" messages={errors} />
+      ) : (
+        <JobCardList jobs={company?.data?.jobs} />
+      )}
+
+      {/* <JobCardList jobs={company?.data?.jobs} /> */}
     </div>
   );
 }

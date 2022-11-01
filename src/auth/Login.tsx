@@ -88,7 +88,7 @@ function Login({ handleLogin }: LoginPropsInterface) {
 
           {formErrors.length ? (
             <Alert
-              resetFormErrors={setFormErrors}
+              resetErrors={setFormErrors}
               type="error"
               messages={formErrors}
             />

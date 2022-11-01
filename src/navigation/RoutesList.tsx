@@ -9,6 +9,7 @@ import EditProfile from "../auth/EditProfile";
 import { useContext } from "react";
 import UserContext from "../context/UserContext";
 import { FormEditUser, FormLoginUser, FormSignupUser } from "../interfaces";
+import Error404Page from "../common/Error404Page";
 
 interface RoutesListPropsInterface {
   handleSignup: (formData: FormSignupUser) => Promise<void>;
@@ -55,8 +56,7 @@ function RoutesList({
       )}
 
       <Route path="/" element={<LandingPage />} />
-
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<Error404Page />} />
     </Routes>
   );
 }

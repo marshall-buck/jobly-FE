@@ -3,21 +3,26 @@ import React from "react";
 interface AlertPropsInterface {
   type: string;
   messages?: string[];
-  resetFormErrors:
-    | React.Dispatch<React.SetStateAction<never[]>>
-    | (() => never[]);
+  resetErrors: React.Dispatch<React.SetStateAction<never[]>> | (() => never[]);
 }
 
 /** Presentational component for showing alerts.
  *
+ * Props
+ * -type: type of alert error, info ...
+ * -messages: array of messages
+ * -resetErrors function passed from parent to clear parent error state on click
+ *
+ *
+ *
  * { LoginForm, SignupForm, ProfileForm } -> Alert
  **/
 
-function Alert({ type, messages = [], resetFormErrors }: AlertPropsInterface) {
+function Alert({ type, messages = [], resetErrors }: AlertPropsInterface) {
   console.debug("Alert", "type", type, "messages=", messages);
 
   function closeAlert() {
-    resetFormErrors([]);
+    resetErrors([]);
   }
 
   return (
