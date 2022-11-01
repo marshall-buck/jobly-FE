@@ -31,3 +31,7 @@
 - [ ] let users submit  and un-submit applications
 - [ ] add live search
 - [ ] let admin users edit company info
+- [ ] add error checking
+- [ ] handle errors with alerts
+- [ ] add loading context
+- [ ] add alert context
