@@ -20,7 +20,7 @@ function CompaniesList() {
     isLoading: boolean;
   }>({ data: null, isLoading: true });
 
-  useEffect(function fetchCompaniesOnLoad() {
+  useEffect(() => {
     async function fetchCompanies() {
       const companiesResults = await JoblyApi.getCompanies(null);
       setCompanies({

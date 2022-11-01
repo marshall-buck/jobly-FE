@@ -22,7 +22,7 @@ interface SignupPropsInterface {
 *
 * App -> RoutesList => Signup
 */
-
+// TODO: if user is loggedin, redirect to error page your are already logged in
 const initialState = {
   username: "",
   password: "",

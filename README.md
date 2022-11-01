@@ -35,3 +35,4 @@
 - [ ] handle errors with alerts
 - [ ] add loading context
 - [ ] add alert context
+- [ ] add global error page
