@@ -1,13 +1,10 @@
 import { render, screen, configure } from "@testing-library/react";
 import RoutesList from "./RoutesList";
 import UserContext from "../context/UserContext";
-import { jobs, userCtx, companies } from "../testUtils";
+import { jobs, userCtx } from "../testUtils";
 import { MemoryRouter } from "react-router-dom";
 
-import JobsList from "../jobs/JobsList";
 import JobCardList from "../jobs/JobCardList";
-import CompaniesList from "../companies/CompaniesList";
-import CompanyDetail from "../companies/CompanyDetail";
 
 configure({ testIdAttribute: "data-cy" });
 

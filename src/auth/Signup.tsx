@@ -55,10 +55,11 @@ function Signup({ handleSignup }: SignupPropsInterface) {
       <form
         className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
         onSubmit={handleSubmitSignup}
+        data-cy="signup-form"
       >
         <div className="card-body">
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="username">
               <span className="label-text">Username</span>
             </label>
             <input
@@ -72,7 +73,7 @@ function Signup({ handleSignup }: SignupPropsInterface) {
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="password">
               <span className="label-text">Password</span>
             </label>
             <input
@@ -86,7 +87,7 @@ function Signup({ handleSignup }: SignupPropsInterface) {
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="firstName">
               <span className="label-text">First Name</span>
             </label>
             <input
@@ -100,7 +101,7 @@ function Signup({ handleSignup }: SignupPropsInterface) {
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="lastName">
               <span className="label-text">Last Name</span>
             </label>
             <input
@@ -114,7 +115,7 @@ function Signup({ handleSignup }: SignupPropsInterface) {
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="email">
               <span className="label-text">Email</span>
             </label>
             <input
