@@ -19,8 +19,7 @@ interface AlertPropsInterface {
  **/
 
 function Alert({ type, messages = [], resetErrors }: AlertPropsInterface) {
-  console.debug("Alert", "type", type, "messages=", messages);
-
+  // TODO: refactor to pass bool instead of function
   function closeAlert() {
     resetErrors([]);
   }
