@@ -92,7 +92,7 @@ const company: Company = {
   description:
     "Somebody program how I. Face give away discussion view act inside. Your official relationship administration here.",
   numEmployees: 245,
-  logoUrl: "/logos/logo3.png",
+  logoUrl: null,
   jobs: [
     {
       id: 7,
