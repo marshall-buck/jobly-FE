@@ -1,23 +1,26 @@
-import {
-  render,
-  waitFor,
-  screen,
-  configure,
-  fireEvent,
-} from "@testing-library/react";
-
+import { render, waitFor, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-
 import CompaniesList from "./CompaniesList";
-import JoblyApi from "../api";
-import axios from "axios";
-import { companies, filteredResults } from "../testUtils";
-import MockAdapter from "axios-mock-adapter";
-
-configure({ testIdAttribute: "data-cy" });
+import { companies } from "../testUtils";
+import { setupServer } from "msw/node";
+import { rest } from "msw";
 
 const BASE_URL = "http://localhost:3001";
-const axiosMock: MockAdapter = new MockAdapter(axios);
+
+const server = setupServer(
+  rest.get(`${BASE_URL}/companies`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ companies }));
+  })
+);
+// Establish API mocking before all tests.
+beforeAll(() => server.listen());
+
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+afterAll(() => server.close());
 
 describe("Tests Company Card", () => {
   it("matches snapshot", () => {
@@ -30,11 +33,6 @@ describe("Tests Company Card", () => {
   });
 
   it("shows all companies", async () => {
-    axiosMock.onGet(`${BASE_URL}/companies`).reply(200, { companies });
-    const res = await JoblyApi.getCompanies(null);
-    expect(res).toEqual(companies);
-    expect(res.length).toEqual(2);
-
     render(
       <MemoryRouter>
         <CompaniesList />
@@ -44,37 +42,22 @@ describe("Tests Company Card", () => {
     expect(out).toHaveTextContent(/arnold/i);
     expect(screen.getByText(/companies list/i)).toBeInTheDocument();
   });
-
-  // it("render by filter", async () => {
-  //   axiosMock
-  //     .onGet(`${BASE_URL}/companies`)
-  //     .reply(200, { companies: filteredResults });
-  //   const res = await JoblyApi.getCompanies("ander");
-  //   expect(res).toEqual(filteredResults);
-
-  //   render(
-  //     <MemoryRouter>
-  //       <CompaniesList />
-  //     </MemoryRouter>
-  //   );
-  //   const out = await waitFor(() => screen.findByRole("list"));
-  //   expect(out).toHaveTextContent(/Somebody program how/i);
-  //   expect(screen.getByText(/companies list/i)).toBeInTheDocument();
-  // });
-
-  // it("searches", async () => {
-  //   axiosMock.onGet(`${BASE_URL}/companies`).reply(200, { companies });
-  //   const res = await JoblyApi.getCompanies(null);
-  //   expect(res).toEqual(companies);
-  //   expect(res.length).toEqual(2);
-
-  //   render(
-  //     <MemoryRouter>
-  //       <CompaniesList />
-  //     </MemoryRouter>
-  //   );
-  //   const out = await waitFor(() => screen.findByRole("list"));
-  //   expect(out).toHaveTextContent(/arnold/i);
-  //   expect(screen.getByText(/companies list/i)).toBeInTheDocument();
-  // });
+  // TODO: figure this out
+  it("handles error", async () => {
+    server.use(
+      rest.get(`${BASE_URL}/companies`, (req, res, ctx) => {
+        return res(
+          ctx.status(404),
+          ctx.json({
+            errorMessage: "404 page not found",
+          })
+        );
+      })
+    );
+    render(
+      <MemoryRouter>
+        <CompaniesList />
+      </MemoryRouter>
+    );
+  });
 });

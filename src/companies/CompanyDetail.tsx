@@ -55,7 +55,10 @@ function CompanyDetail() {
   }
 
   return (
-    <div className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto">
+    <div
+      data-cy="company-detail"
+      className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto"
+    >
       <h1 className="card-title text-4xl ">{company?.data?.name}</h1>
       <p>{company.data?.description}</p>
 

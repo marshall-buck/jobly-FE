@@ -28,8 +28,8 @@ function CompaniesList() {
           data: companiesResults,
           isLoading: false,
         });
-      } catch (err) {
-        console.debug("from companies list", err);
+      } catch (err: any) {
+        // console.debug("from companies list", err);
       }
     }
     fetchCompanies();
