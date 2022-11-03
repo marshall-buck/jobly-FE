@@ -140,6 +140,14 @@ const job: Job = {
   companyHandle: "watson-davis",
   companyName: "Watson-Davis",
 };
+const job2: Job = {
+  id: 1,
+  title: "Conservator, furniture",
+  salary: 110000,
+  equity: null,
+  companyHandle: "watson-davis",
+  companyName: "Watson-Davis",
+};
 export {
   userCtx,
   jobs,
@@ -149,4 +157,5 @@ export {
   filteredResults,
   user,
   editUser,
+  job2,
 };

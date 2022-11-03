@@ -26,7 +26,7 @@ type Job = {
   id: number;
   title: string;
   salary: number | null;
-  equity: string;
+  equity: string | null;
   companyName?: string;
   companyHandle?: string;
 };

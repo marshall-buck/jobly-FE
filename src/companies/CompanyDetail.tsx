@@ -24,7 +24,7 @@ function CompanyDetail() {
   }>({ data: null, isLoading: true });
   const { handle } = useParams<Company["handle"]>();
   const [errors, setErrors] = useState([]);
-
+  // TODO: Fix errors
   useEffect(() => {
     async function fetchCompanies() {
       try {

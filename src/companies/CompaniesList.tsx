@@ -45,14 +45,14 @@ function CompaniesList() {
   if (companies.isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="flex flex-col gap-4 px-4 md:px-12  md:container justify-around mx-auto">
+    <div
+      role="list"
+      className="flex flex-col gap-4 px-4 md:px-12  md:container justify-around mx-auto"
+    >
       <h1 className="text-3xl font-bold text-center">Companies List</h1>
       <SearchBar handleSearch={handleSearch} />
 
-      <div
-        role="list"
-        className="flex flex-row flex-wrap justify-center md:justify-around gap-4"
-      >
+      <div className="flex flex-row flex-wrap justify-center md:justify-around gap-4">
         {companies?.data?.map((c) => (
           <CompanyCard
             key={c.handle}
