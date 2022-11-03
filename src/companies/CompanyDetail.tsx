@@ -66,8 +66,6 @@ function CompanyDetail() {
       ) : (
         <JobCardList jobs={company?.data?.jobs} />
       )}
-
-      {/* <JobCardList jobs={company?.data?.jobs} /> */}
     </div>
   );
 }

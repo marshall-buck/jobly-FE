@@ -38,33 +38,30 @@ function App() {
   /**
    *  Checks for token and hydrates user on load and when token is changed.
    */
-  useEffect(
-    function loadUserInfo() {
-      async function getCurrentUser() {
-        setUser((user) => {
-          return { ...user, isLoading: true };
-        });
-        if (token) {
-          try {
-            const payload: TokenPayload = jwt_decode(token);
-            JoblyApi.token = token;
-            const response = await JoblyApi.getUserData(payload.username);
+  useEffect(() => {
+    async function getCurrentUser() {
+      setUser((user) => {
+        return { ...user, isLoading: true };
+      });
+      if (token) {
+        try {
+          const payload: TokenPayload = jwt_decode(token);
+          JoblyApi.token = token;
+          const response = await JoblyApi.getUserData(payload.username);
 
-            setUser({ data: response, isLoading: false });
-          } catch (err) {
-            console.error("App loadUserInfo: problem loading", err);
-            // TODO:Alert to log in again
-            setToken(null);
-            setUser({ data: null, isLoading: false });
-          }
-        } else {
+          setUser({ data: response, isLoading: false });
+        } catch (err) {
+          console.error("App loadUserInfo: problem loading", err);
+          // TODO:Alert to log in again
+          setToken(null);
           setUser({ data: null, isLoading: false });
         }
+      } else {
+        setUser({ data: null, isLoading: false });
       }
-      getCurrentUser();
-    },
-    [token]
-  );
+    }
+    getCurrentUser();
+  }, [token]);
 
   /**
    * Handles user signup and sets token to Local Storage

@@ -132,5 +132,21 @@ const company: Company = {
     },
   ],
 };
-
-export { userCtx, jobs, companies, company, filteredResults, user, editUser };
+const job: Job = {
+  id: 1,
+  title: "Conservator, furniture",
+  salary: 110000,
+  equity: "0",
+  companyHandle: "watson-davis",
+  companyName: "Watson-Davis",
+};
+export {
+  userCtx,
+  jobs,
+  job,
+  companies,
+  company,
+  filteredResults,
+  user,
+  editUser,
+};

@@ -22,11 +22,15 @@ function CompaniesList() {
 
   useEffect(() => {
     async function fetchCompanies() {
-      const companiesResults = await JoblyApi.getCompanies(null);
-      setCompanies({
-        data: companiesResults,
-        isLoading: false,
-      });
+      try {
+        const companiesResults = await JoblyApi.getCompanies(null);
+        setCompanies({
+          data: companiesResults,
+          isLoading: false,
+        });
+      } catch (err) {
+        console.debug("from companies list", err);
+      }
     }
     fetchCompanies();
   }, []);

@@ -11,7 +11,7 @@ import {
 } from "./testUtils";
 import MockAdapter from "axios-mock-adapter";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const BASE_URL = "http://localhost:3001";
 const axiosMock: MockAdapter = new MockAdapter(axios);
 
 describe("Tests api calls", () => {
