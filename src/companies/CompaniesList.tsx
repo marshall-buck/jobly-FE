@@ -34,7 +34,7 @@ function CompaniesList() {
     }
     fetchCompanies();
   }, []);
-
+  // TODO: Add try catch
   /** handle submit of form set new state */
   async function handleSearch(term: Company["name"]): Promise<void> {
     setCompanies({ ...companies, isLoading: true });
@@ -49,7 +49,10 @@ function CompaniesList() {
       <h1 className="text-3xl font-bold text-center">Companies List</h1>
       <SearchBar handleSearch={handleSearch} />
 
-      <div className="flex flex-row flex-wrap justify-center md:justify-around gap-4">
+      <div
+        role="list"
+        className="flex flex-row flex-wrap justify-center md:justify-around gap-4"
+      >
         {companies?.data?.map((c) => (
           <CompanyCard
             key={c.handle}
