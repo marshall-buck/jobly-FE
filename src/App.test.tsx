@@ -9,6 +9,7 @@ import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
+import { companies } from "./testUtils";
 
 configure({ testIdAttribute: "data-cy" });
 
