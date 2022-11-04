@@ -12,9 +12,16 @@ import {
 import MockAdapter from "axios-mock-adapter";
 
 const BASE_URL = "http://localhost:3001";
-const axiosMock: MockAdapter = new MockAdapter(axios);
 
 describe("Tests api calls", () => {
+  let axiosMock: MockAdapter;
+  beforeEach(() => {
+    axiosMock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    axiosMock.reset();
+  });
   it("returns list of companies", async () => {
     axiosMock.onGet(`${BASE_URL}/companies`).reply(200, { companies });
     const res = await JoblyApi.getCompanies(null);
@@ -76,11 +83,14 @@ describe("Tests api calls", () => {
     expect(res).toEqual(jobs);
   });
 
-  // it("handles error", async () => {
-  //   axiosMock.onGet(`${BASE_URL}/jobs`).reply(404,  { error: { message: 'Not Found', status: 404  }
-  //   });
-  //   const res =await JoblyApi.getJobs(null);
-  //     expect(res).rejects()
-
-  // });
+  it("handles error", async () => {
+    axiosMock.onGet(`${BASE_URL}/jobs`).networkError();
+    let error;
+    try {
+      await JoblyApi.getJobs(null);
+    } catch (err) {
+      error = err;
+    }
+    expect(error).toEqual(["API ERROR , Error: Network Error"]);
+  });
 });
