@@ -1,10 +1,9 @@
 import { render, screen } from "@testing-library/react";
-
 import { MemoryRouter } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 
-describe("Error page tests", () => {
-  it("matches snapshot", function () {
+describe("LoadingSpinner tests", () => {
+  it("matches LoadingSpinner snapshot", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <LoadingSpinner />
@@ -13,7 +12,7 @@ describe("Error page tests", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("renders correctly", () => {
+  it("renders LoadingSpinner correctly", () => {
     render(
       <MemoryRouter>
         <LoadingSpinner />

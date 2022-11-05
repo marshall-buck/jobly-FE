@@ -1,10 +1,9 @@
 import { render, screen } from "@testing-library/react";
-
 import { MemoryRouter } from "react-router-dom";
 import Error404Page from "./Error404Page";
 
-describe("Error page tests", () => {
-  it("matches snapshot", function () {
+describe("Error404Page page tests", () => {
+  it("matches Error404Page snapshot", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <Error404Page />
@@ -13,7 +12,7 @@ describe("Error page tests", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("renders correctly", () => {
+  it("renders Error404Page correctly", () => {
     render(
       <MemoryRouter>
         <Error404Page />

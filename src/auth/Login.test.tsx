@@ -1,6 +1,5 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
-
 import { MemoryRouter } from "react-router-dom";
 
 const handleLogin = jest.fn();
@@ -15,7 +14,7 @@ describe("Tests Login", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates form correctly", async function () {
+  it("populates Login form correctly", async function () {
     render(
       <MemoryRouter>
         <Login handleLogin={handleLogin} />

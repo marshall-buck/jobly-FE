@@ -1,13 +1,11 @@
-/* eslint-disable testing-library/no-debugging-utils */
-
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import LandingPage from "./LandingPage";
 import UserContext from "./context/UserContext";
 import { userCtx } from "./testMockData";
 
-describe("Tests Landing Page", () => {
-  it("Display name when logged in", function () {
+describe("Tests LandingPage", () => {
+  it("Display name when logged in - LandingPage", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
@@ -23,7 +21,7 @@ describe("Tests Landing Page", () => {
     expect(screen.queryByText(/Sign Up/)).not.toBeInTheDocument();
   });
 
-  it("matches snapshot when logged out", function () {
+  it("matches snapshot when logged out - LandingPage", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider value={{ user: null, token: null }}>

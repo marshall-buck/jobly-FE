@@ -1,13 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 
-describe("Tests search Bar", () => {
-  it("matches snapshot", function () {
+describe("Tests SearchBar", () => {
+  it("matches SearchBar snapshot", function () {
     const { asFragment } = render(<SearchBar handleSearch={jest.fn} />);
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("adds word and calls submit func", () => {
+  it("adds word and calls submit func SearchBar", () => {
     const handleSearch = jest.fn();
     render(<SearchBar handleSearch={handleSearch} />);
     const form = screen.queryByTestId("search-bar-form") as Element;

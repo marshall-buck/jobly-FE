@@ -1,12 +1,11 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Signup from "./Signup";
-
 import { MemoryRouter } from "react-router-dom";
 
 const handleSignup = jest.fn();
 
-describe("Tests signup", () => {
-  it("matches snapshot", function () {
+describe("Tests Signup", () => {
+  it("matches Signup snapshot", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <Signup handleSignup={handleSignup} />
@@ -15,7 +14,7 @@ describe("Tests signup", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates form correctly", async function () {
+  it("populates Signup form correctly", async function () {
     render(
       <MemoryRouter>
         <Signup handleSignup={handleSignup} />

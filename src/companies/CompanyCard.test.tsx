@@ -1,12 +1,10 @@
 import { render, screen } from "@testing-library/react";
-
 import { company } from "../testMockData";
 import { MemoryRouter } from "react-router-dom";
-
 import CompanyCard from "./CompanyCard";
 
-describe("Tests Company Card", () => {
-  it("matches snapshot", function () {
+describe("Tests CompanyCard Snapshot", () => {
+  it("matches CompanyCard snapshot", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <CompanyCard
@@ -20,7 +18,7 @@ describe("Tests Company Card", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates card correctly", function () {
+  it("populates CompanyCard correctly", function () {
     render(
       <MemoryRouter>
         <CompanyCard

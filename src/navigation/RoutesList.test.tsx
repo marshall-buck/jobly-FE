@@ -3,17 +3,15 @@ import RoutesList from "./RoutesList";
 import UserContext from "../context/UserContext";
 import { jobs, userCtx } from "../testMockData";
 import { MemoryRouter } from "react-router-dom";
-
 import JobCardList from "../jobs/JobCardList";
 
 const badRoute = "/some/bad/route";
 const companiesRoute = "/companies";
 const loginRoute = "/login";
-
 const profileRoute = "/profile";
 const jobsRoute = "/jobs";
 
-describe("Tests routes when user IS logged in", () => {
+describe("Tests routes when user is logged in", () => {
   it("landing on a bad page user logged in", () => {
     render(
       <MemoryRouter initialEntries={[badRoute]}>
@@ -143,8 +141,8 @@ describe("Tests routes when user IS logged in", () => {
   // });
 });
 
-describe("Tests routes when user is NOT logged in", () => {
-  it("landing on a bad page", () => {
+describe("Tests routes when user is logged out", () => {
+  it("landing on a bad page when user is logged out", () => {
     render(
       <MemoryRouter initialEntries={[badRoute]}>
         <RoutesList
@@ -157,7 +155,7 @@ describe("Tests routes when user is NOT logged in", () => {
     expect(screen.getByText(/404/)).toBeInTheDocument();
   });
 
-  it("renders home page", () => {
+  it("renders home page when user is logged out", () => {
     render(
       <MemoryRouter initialEntries={["/"]}>
         <RoutesList
@@ -170,7 +168,7 @@ describe("Tests routes when user is NOT logged in", () => {
     expect(screen.getByText(/welcome/i)).toBeInTheDocument();
   });
 
-  it("renders login route", () => {
+  it("renders login route when user is logged out", () => {
     render(
       <MemoryRouter initialEntries={[loginRoute]}>
         <RoutesList
@@ -183,7 +181,7 @@ describe("Tests routes when user is NOT logged in", () => {
     expect(screen.getByTestId("login-form")).toBeInTheDocument();
   });
 
-  it("renders 404 route, when profile is manually entered into address bar", () => {
+  it("renders 404 route, when profile is manually entered into address bar when user is logged out", () => {
     render(
       <MemoryRouter initialEntries={[profileRoute]}>
         <RoutesList
@@ -196,7 +194,7 @@ describe("Tests routes when user is NOT logged in", () => {
     expect(screen.queryByTestId("edit-user-form")).not.toBeInTheDocument();
     expect(screen.getByText(/404/)).toBeInTheDocument();
   });
-  it("renders 404 route, when companies is manually entered into address bar", () => {
+  it("renders 404 route, when companies is manually entered into address bar when user is logged out", () => {
     render(
       <MemoryRouter initialEntries={[companiesRoute]}>
         <RoutesList
@@ -210,7 +208,7 @@ describe("Tests routes when user is NOT logged in", () => {
     expect(screen.getByText(/404/)).toBeInTheDocument();
   });
 
-  it("renders 404 route, when jobs is manually entered into address bar", () => {
+  it("renders 404 route, when jobs is manually entered into address bar when user is logged out", () => {
     render(
       <MemoryRouter initialEntries={[jobsRoute]}>
         <RoutesList

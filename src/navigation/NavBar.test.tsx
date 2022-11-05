@@ -1,5 +1,3 @@
-/* eslint-disable testing-library/no-debugging-utils */
-
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import NavBar from "./NavBar";
@@ -7,7 +5,7 @@ import UserContext from "../context/UserContext";
 import { userCtx } from "../testMockData";
 
 describe("Navbar Tests", () => {
-  it("Display name when logged in", function () {
+  it("Display name when logged in - Navbar", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
@@ -23,7 +21,7 @@ describe("Navbar Tests", () => {
     expect(screen.queryByText(/Sign Up/)).not.toBeInTheDocument();
   });
 
-  it("matches snapshot when logged out", function () {
+  it("matches snapshot when logged out Navbar", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider value={{ user: null, token: null }}>

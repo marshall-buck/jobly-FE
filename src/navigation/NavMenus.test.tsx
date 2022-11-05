@@ -1,13 +1,11 @@
-/* eslint-disable testing-library/no-debugging-utils */
-
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import NavMenus from "./NavMenus";
 import UserContext from "../context/UserContext";
 import { userCtx } from "../testMockData";
 
-describe("Tests Nav menus", () => {
-  it("Display name when logged in", function () {
+describe("Tests NavMenus", () => {
+  it("Display name when logged in - NavMenus", function () {
     function handleLogout() {
       expect(true).toBe(true);
     }
@@ -32,7 +30,7 @@ describe("Tests Nav menus", () => {
     expect.assertions(6);
   });
 
-  it("matches snapshot when logged out", function () {
+  it("matches snapshot when logged out - NavMenus", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider value={{ user: null, token: null }}>

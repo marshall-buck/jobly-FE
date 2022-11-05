@@ -5,7 +5,7 @@ import { job, job2 } from "../testMockData";
 import JobCard from "./JobCard";
 
 describe("Tests Job Card", () => {
-  it("matches snapshot", function () {
+  it("matches JobCard snapshot", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <JobCard {...job} />
@@ -14,7 +14,7 @@ describe("Tests Job Card", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates job correctly", function () {
+  it("populates JobCard correctly", function () {
     render(
       <MemoryRouter>
         <JobCard {...job} />
@@ -27,13 +27,13 @@ describe("Tests Job Card", () => {
     expect(screen.getByText(/equity/i)).toBeInTheDocument();
     expect(screen.getByText(/ 0/i)).toBeInTheDocument();
   });
-  it("populates job correctly without equity", function () {
-    const { debug } = render(
+  it("populates JobCard correctly without equity", function () {
+    render(
       <MemoryRouter>
         <JobCard {...job2} />
       </MemoryRouter>
     );
-    debug();
+
     expect(screen.getByText(/furniture/i)).toBeInTheDocument();
     expect(screen.getByText(/110000/i)).toBeInTheDocument();
     expect(screen.getByText(/watson/i)).toBeInTheDocument();

@@ -7,7 +7,7 @@ import { MemoryRouter } from "react-router-dom";
 const editUserMock = jest.fn();
 
 describe("Tests EditProfile", () => {
-  it("matches snapshot", function () {
+  it("matches EditProfile snapshot", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
@@ -20,7 +20,7 @@ describe("Tests EditProfile", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates form with data", function () {
+  it("populates EditProfile form with data", function () {
     render(
       <MemoryRouter>
         <UserContext.Provider
@@ -50,7 +50,7 @@ describe("Tests EditProfile", () => {
     expect(email).toHaveValue(userCtx.user?.email);
   });
 
-  it("submits correct data", function () {
+  it("submits EditProfile correct data", function () {
     render(
       <MemoryRouter>
         <UserContext.Provider
