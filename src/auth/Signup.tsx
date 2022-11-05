@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { FormSignupUser, User } from "../interfaces";
 
 interface SignupPropsInterface {
@@ -32,7 +32,6 @@ const initialState = {
 };
 function Signup({ handleSignup }: SignupPropsInterface) {
   const [formData, setFormData] = useState<FormSignupUser>(initialState);
-  const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
   function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
@@ -47,7 +46,6 @@ function Signup({ handleSignup }: SignupPropsInterface) {
     evt.preventDefault();
     await handleSignup(formData);
     setFormData(initialState);
-    navigate("/companies");
   }
 
   return (

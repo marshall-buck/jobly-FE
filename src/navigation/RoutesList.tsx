@@ -42,7 +42,7 @@ function RoutesList({
           />
         </>
       )}
-
+      <Route path="/" element={<LandingPage />} />
       {user && (
         <>
           <Route
@@ -54,7 +54,7 @@ function RoutesList({
           <Route path="/jobs" element={<JobsList />} />
         </>
       )}
-      <Route path="/" element={<LandingPage />} />
+
       <Route path="*" element={<Error404Page />} />
     </Routes>
   );

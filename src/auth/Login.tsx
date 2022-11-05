@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Alert from "../common/Alert";
+
 import { FormLoginUser } from "../interfaces";
 
 interface LoginPropsInterface {
@@ -25,8 +24,6 @@ const initialState: FormLoginUser = {
 
 function Login({ handleLogin }: LoginPropsInterface) {
   const [formData, setFormData] = useState<FormLoginUser>(initialState);
-  const [formErrors, setFormErrors] = useState([]);
-  const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
   function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
@@ -39,14 +36,7 @@ function Login({ handleLogin }: LoginPropsInterface) {
 
   async function handleLoginSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    try {
-      await handleLogin(formData);
-      // setFormData(initialState);
-    } catch (err: any) {
-      setFormErrors(err);
-    } finally {
-      navigate("/companies");
-    }
+    await handleLogin(formData);
   }
 
   return (
@@ -86,13 +76,6 @@ function Login({ handleLogin }: LoginPropsInterface) {
             />
           </div>
 
-          {formErrors.length ? (
-            <Alert
-              resetErrors={setFormErrors}
-              type="error"
-              messages={formErrors}
-            />
-          ) : null}
           <div className="form-control mt-6">
             <button className="btn btn-primary">Login</button>
           </div>
