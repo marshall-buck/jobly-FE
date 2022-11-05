@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { company } from "../testUtils";
+import { company } from "../testMockData";
 import { MemoryRouter } from "react-router-dom";
 
 import CompanyCard from "./CompanyCard";

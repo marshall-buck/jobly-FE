@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import CompanyDetail from "./CompanyDetail";
-import { company } from "../testUtils";
+import { company } from "../testMockData";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
 

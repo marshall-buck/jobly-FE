@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import LandingPage from "./LandingPage";
 import UserContext from "./context/UserContext";
-import { userCtx } from "./testUtils";
+import { userCtx } from "./testMockData";
 
 describe("Tests Landing Page", () => {
   it("Display name when logged in", function () {

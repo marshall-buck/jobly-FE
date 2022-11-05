@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
-import { jobs } from "../testUtils";
+import { jobs } from "../testMockData";
 import JobCardList from "./JobCardList";
 
 describe("Tests Job Card", () => {

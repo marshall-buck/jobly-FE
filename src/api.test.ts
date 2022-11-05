@@ -8,7 +8,7 @@ import {
   user,
   editUser,
   jobs,
-} from "./testUtils";
+} from "./testMockData";
 import MockAdapter from "axios-mock-adapter";
 
 const BASE_URL = "http://localhost:3001";

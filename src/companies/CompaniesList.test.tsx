@@ -1,7 +1,7 @@
 import { render, waitFor, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import CompaniesList from "./CompaniesList";
-import { companies } from "../testUtils";
+import { companies } from "../testMockData";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
 

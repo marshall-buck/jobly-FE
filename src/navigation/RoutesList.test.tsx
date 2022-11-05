@@ -1,7 +1,7 @@
 import { render, screen, configure } from "@testing-library/react";
 import RoutesList from "./RoutesList";
 import UserContext from "../context/UserContext";
-import { jobs, userCtx } from "../testUtils";
+import { jobs, userCtx } from "../testMockData";
 import { MemoryRouter } from "react-router-dom";
 
 import JobCardList from "../jobs/JobCardList";
