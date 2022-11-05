@@ -1,4 +1,4 @@
-import { render, screen, configure } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import RoutesList from "./RoutesList";
 import UserContext from "../context/UserContext";
 import { jobs, userCtx } from "../testMockData";
@@ -6,19 +6,12 @@ import { MemoryRouter } from "react-router-dom";
 
 import JobCardList from "../jobs/JobCardList";
 
-configure({ testIdAttribute: "data-cy" });
-
 const badRoute = "/some/bad/route";
 const companiesRoute = "/companies";
 const loginRoute = "/login";
-const signupRoute = "/signup";
+
 const profileRoute = "/profile";
 const jobsRoute = "/jobs";
-
-// jest.mock("react-router-dom", () => ({
-//   ...jest.requireActual("react-router-dom"),
-//   useParams: () => ({ handle: "anderson-arias-morrow" }),
-// }));
 
 describe("Tests routes when user IS logged in", () => {
   it("landing on a bad page user logged in", () => {

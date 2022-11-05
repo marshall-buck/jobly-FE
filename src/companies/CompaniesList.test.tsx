@@ -1,15 +1,9 @@
 import { render, waitFor, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import CompaniesList from "./CompaniesList";
-import { companies } from "../testMockData";
+import { BASE_URL, companies } from "../testMockData";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
-
-import { configure } from "@testing-library/react";
-
-configure({ testIdAttribute: "data-cy" });
-
-const BASE_URL = "http://localhost:3001";
 
 const server = setupServer(
   rest.get(`${BASE_URL}/companies`, (req, res, ctx) => {

@@ -1,8 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import SearchBar from "./SearchBar";
-import { configure } from "@testing-library/react";
-
-configure({ testIdAttribute: "data-cy" });
 
 describe("Tests search Bar", () => {
   it("matches snapshot", function () {

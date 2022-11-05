@@ -1,11 +1,8 @@
-import { fireEvent, render, screen, configure } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import EditProfile from "./EditProfile";
 import { editUser, userCtx } from "../testMockData";
 import UserContext from "../context/UserContext";
-
 import { MemoryRouter } from "react-router-dom";
-
-configure({ testIdAttribute: "data-cy" });
 
 const editUserMock = jest.fn();
 

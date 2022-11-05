@@ -8,10 +8,9 @@ import {
   user,
   editUser,
   jobs,
+  BASE_URL,
 } from "./testMockData";
 import MockAdapter from "axios-mock-adapter";
-
-const BASE_URL = "http://localhost:3001";
 
 describe("Tests api calls", () => {
   let axiosMock: MockAdapter;

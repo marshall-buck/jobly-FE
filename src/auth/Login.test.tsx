@@ -1,15 +1,7 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  configure,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
 
 import { MemoryRouter } from "react-router-dom";
-
-configure({ testIdAttribute: "data-cy" });
 
 const handleLogin = jest.fn();
 

@@ -148,6 +148,8 @@ const job2: Job = {
   companyHandle: "watson-davis",
   companyName: "Watson-Davis",
 };
+
+const BASE_URL = "http://localhost:3001";
 export {
   userCtx,
   jobs,
@@ -158,4 +160,5 @@ export {
   user,
   editUser,
   job2,
+  BASE_URL,
 };
