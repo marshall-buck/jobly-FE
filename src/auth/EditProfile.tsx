@@ -51,9 +51,6 @@ function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
     // setFormData(() => user);
   }
 
-  if (!user) {
-  }
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form

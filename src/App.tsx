@@ -107,8 +107,6 @@ function App() {
       setUser({ data: null, isLoading: false });
       console.log("from login");
     }
-
-    // navigate("/companies");
   }
 
   /**
