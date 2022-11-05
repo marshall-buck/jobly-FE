@@ -1,10 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import JoblyApi from "../api";
 import JobCardList from "../jobs/JobCardList";
 import { Company } from "../interfaces";
 import LoadingSpinner from "../common/LoadingSpinner";
-import Alert from "../common/Alert";
 
 /**
  * Company  Detail
@@ -23,7 +22,8 @@ function CompanyDetail() {
     isLoading: boolean;
   }>({ data: null, isLoading: true });
   const { handle } = useParams<Company["handle"]>();
-  const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
+
   // TODO: Fix errors
   useEffect(() => {
     async function fetchCompanies() {
@@ -35,16 +35,17 @@ function CompanyDetail() {
           data: companyResult,
           isLoading: false,
         });
-      } catch (err) {
-        setErrors([err] as never[]);
+      } catch (err: any) {
         setCompany({
           data: null,
           isLoading: false,
         });
+        navigate(-1);
       }
     }
     fetchCompanies();
-  }, [handle]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /**
    * waiting for user data to hydrate
@@ -64,11 +65,7 @@ function CompanyDetail() {
 
       <h2 className="text-2xl ">Available Jobs</h2>
 
-      {errors.length ? (
-        <Alert resetErrors={setErrors} type="error" messages={errors} />
-      ) : (
-        <JobCardList jobs={company?.data?.jobs} />
-      )}
+      <JobCardList jobs={company?.data?.jobs} />
     </div>
   );
 }

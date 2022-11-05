@@ -55,7 +55,7 @@ function App() {
           setUser({ data: response, isLoading: false });
         } catch (err) {
           console.error("App loadUserInfo: problem loading", err);
-          // TODO:Alert to log in again
+
           setToken(null);
           setUser({ data: null, isLoading: false });
         }
