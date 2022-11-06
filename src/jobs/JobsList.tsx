@@ -23,11 +23,18 @@ function JobsList() {
 
   useEffect(() => {
     async function fetchJobs() {
-      const jobsResults = await JoblyApi.getJobs(null);
-      setJobs({
-        data: jobsResults,
-        isLoading: false,
-      });
+      try {
+        const jobsResults = await JoblyApi.getJobs(null);
+        setJobs({
+          data: jobsResults,
+          isLoading: false,
+        });
+      } catch (err) {
+        setJobs({
+          data: null,
+          isLoading: false,
+        });
+      }
     }
     fetchJobs();
   }, []);
@@ -49,7 +56,13 @@ function JobsList() {
       <h1 className="text-3xl font-bold text-center">Jobs List</h1>
       <SearchBar handleSearch={handleSearch} />
 
-      <JobCardList jobs={jobs.data} />
+      {jobs.data ? (
+        <>
+          <JobCardList jobs={jobs.data} />
+        </>
+      ) : (
+        <h1>No job for you, please try again</h1>
+      )}
     </div>
   );
 }
