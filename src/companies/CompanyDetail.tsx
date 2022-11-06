@@ -22,7 +22,6 @@ function CompanyDetail() {
     isLoading: boolean;
   }>({ data: null, isLoading: true });
   const { handle } = useParams<Company["handle"]>();
-  const navigate = useNavigate();
 
   // TODO: Fix errors
   useEffect(() => {
@@ -40,12 +39,10 @@ function CompanyDetail() {
           data: null,
           isLoading: false,
         });
-        navigate(-1);
       }
     }
     fetchCompanies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [handle]);
 
   /**
    * waiting for user data to hydrate

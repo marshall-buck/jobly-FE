@@ -5,7 +5,6 @@ import { MemoryRouter } from "react-router-dom";
 import CompaniesList from "./CompaniesList";
 import { companies, BASE_URL } from "../testMockData";
 import JoblyApi from "../api";
-import exp from "constants";
 
 describe("Tests CompaniesList", () => {
   let axiosMock: MockAdapter;
@@ -46,7 +45,7 @@ describe("Tests CompaniesList", () => {
     expect(res).toEqual(companies);
     expect(res.length).toEqual(2);
 
-    const { debug } = render(
+    render(
       <MemoryRouter>
         <CompaniesList />
       </MemoryRouter>

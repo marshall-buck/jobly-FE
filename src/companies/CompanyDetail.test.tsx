@@ -1,11 +1,23 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import CompanyDetail from "./CompanyDetail";
-import { server } from "../mocks/server";
-import { rest } from "msw";
-import { BASE_URL } from "../testMockData";
+
+import { BASE_URL, company, userCtx } from "../testMockData";
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
+import JoblyApi from "../api";
+import UserContext from "../context/UserContext";
+import RoutesList from "../navigation/RoutesList";
 
 describe("Tests CompanyDetail", () => {
+  let axiosMock: MockAdapter;
+  beforeEach(() => {
+    axiosMock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    axiosMock.reset();
+  });
   it("matches CompanyDetail snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
@@ -16,31 +28,31 @@ describe("Tests CompanyDetail", () => {
   });
 
   it("render CompanyDetail", async () => {
+    axiosMock
+      .onGet(`${BASE_URL}/companies/anderson-arias-morrow`)
+      .reply(200, { company });
+    const res = await JoblyApi.getCompanyByHandle("anderson-arias-morrow");
+    expect(res).toEqual(company);
+    expect(res.handle).toContain("anderson-arias-morrow");
+
     render(
-      <MemoryRouter>
-        <CompanyDetail />
+      <MemoryRouter initialEntries={["/companies/anderson-arias-morrow"]}>
+        <UserContext.Provider
+          value={{ user: userCtx.user, token: userCtx.token }}
+        >
+          <RoutesList
+            handleSignup={jest.fn()}
+            handleLogin={jest.fn()}
+            handleEditForm={jest.fn()}
+          />
+        </UserContext.Provider>
       </MemoryRouter>
     );
 
-    await screen.findAllByTestId("company-detail");
+    await waitFor(() => screen.findByTestId("company-detail"));
+    expect(screen.getByText(/Jobs/i)).toBeInTheDocument();
+
     expect(screen.getByText(/Anderson/i)).toBeInTheDocument();
     expect(screen.getByText(/Somebody/i)).toBeInTheDocument();
-  });
-
-  it("errors CompanyDetail", async () => {
-    server.use(
-      rest.get(`${BASE_URL}/companies/:handle`, (req, res, ctx) => {
-        return res(ctx.status(404));
-      })
-    );
-    render(
-      <MemoryRouter>
-        <CompanyDetail />
-      </MemoryRouter>
-    );
-
-    await screen.findAllByTestId("company-detail");
-    expect(screen.queryByText(/Anderson/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Somebody/i)).not.toBeInTheDocument();
   });
 });

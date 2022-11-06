@@ -50,6 +50,7 @@ function RoutesList({
             element={<EditProfile handleEditForm={handleEditForm} />}
           />
           <Route path="/companies" element={<CompaniesList />} />
+
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobsList />} />
         </>
