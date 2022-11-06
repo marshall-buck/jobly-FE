@@ -26,15 +26,22 @@ function CompanyDetail() {
   // TODO: Fix errors
   useEffect(() => {
     async function fetchCompanies() {
-      try {
-        const companyResult = await JoblyApi.getCompanyByHandle(
-          handle as string
-        );
-        setCompany({
-          data: companyResult,
-          isLoading: false,
-        });
-      } catch (err: any) {
+      if (handle) {
+        try {
+          const companyResult = await JoblyApi.getCompanyByHandle(
+            handle as string
+          );
+          setCompany({
+            data: companyResult,
+            isLoading: false,
+          });
+        } catch (err: any) {
+          setCompany({
+            data: null,
+            isLoading: false,
+          });
+        }
+      } else {
         setCompany({
           data: null,
           isLoading: false,
@@ -57,12 +64,16 @@ function CompanyDetail() {
       data-cy="company-detail"
       className="flex flex-col gap-4 px-4 md:px-12 items-stretch md:container mx-auto"
     >
-      <h1 className="card-title text-4xl ">{company?.data?.name}</h1>
-      <p>{company.data?.description}</p>
-
-      <h2 className="text-2xl ">Available Jobs</h2>
-
-      <JobCardList jobs={company?.data?.jobs} />
+      {company.data ? (
+        <>
+          <h1 className="card-title text-4xl ">{company?.data?.name}</h1>
+          <p>{company.data?.description}</p>
+          <h2 className="text-2xl ">Available Jobs</h2>
+          <JobCardList jobs={company?.data?.jobs} />
+        </>
+      ) : (
+        <h1>No company for you, pleas try again</h1>
+      )}
     </div>
   );
 }
