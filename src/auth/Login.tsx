@@ -36,7 +36,11 @@ function Login({ handleLogin }: LoginPropsInterface) {
 
   async function handleLoginSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    await handleLogin(formData);
+    try {
+      await handleLogin(formData);
+    } catch (err) {
+      console.debug("from login: ", err);
+    }
   }
 
   return (

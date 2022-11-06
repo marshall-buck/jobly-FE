@@ -93,19 +93,11 @@ function App() {
    * { username, password}
    */
   async function handleLogin(formData: FormLoginUser): Promise<void> {
-    try {
-      const token = await JoblyApi.loginUserApi(formData);
-      setUser((user) => {
-        return { ...user, isLoading: false };
-      });
+    const token = await JoblyApi.loginUserApi(formData);
 
-      setToken(token);
-      localStorage.setItem("token", token);
-      navigate("/companies");
-    } catch (err) {
-      setUser({ data: null, isLoading: false });
-      console.log("from login");
-    }
+    setToken(token);
+    localStorage.setItem("token", token);
+    navigate("/companies");
   }
 
   /**

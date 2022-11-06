@@ -30,7 +30,7 @@ function RoutesList({
   handleEditForm,
 }: RoutesListPropsInterface) {
   const { user } = useContext(UserContext);
-  //TODO Fix:routing bug
+
   return (
     <Routes>
       {!user && (
