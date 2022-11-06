@@ -76,16 +76,16 @@ const editUser: FormEditUser = {
   password: "123456",
 };
 
-const filteredResults: Omit<Company, "companyHandle" | "companyName">[] = [
-  {
-    handle: "anderson-arias-morrow",
-    name: "Anderson, Arias and Morrow",
-    description:
-      "Somebody program how I. Face give away discussion view act inside. Your official relationship administration here.",
-    numEmployees: 245,
-    logoUrl: "/logos/logo3.png",
-  },
-];
+// const filteredResults: Omit<Company, "companyHandle" | "companyName">[] = [
+//   {
+//     handle: "anderson-arias-morrow",
+//     name: "Anderson, Arias and Morrow",
+//     description:
+//       "Somebody program how I. Face give away discussion view act inside. Your official relationship administration here.",
+//     numEmployees: 245,
+//     logoUrl: "/logos/logo3.png",
+//   },
+// ];
 const company: Company = {
   handle: "anderson-arias-morrow",
   name: "Anderson, Arias and Morrow",
@@ -156,7 +156,6 @@ export {
   job,
   companies,
   company,
-  filteredResults,
   user,
   editUser,
   job2,

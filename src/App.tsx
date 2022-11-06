@@ -27,7 +27,6 @@ interface UserStateInterface {
  */
 
 function App() {
-  // const navigate = useNavigate();
   const [user, setUser] = useState<UserStateInterface>({
     data: null,
     isLoading: true,

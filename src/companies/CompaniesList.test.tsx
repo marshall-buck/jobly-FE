@@ -1,8 +1,21 @@
 import { render, waitFor, screen, fireEvent } from "@testing-library/react";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 import { MemoryRouter } from "react-router-dom";
 import CompaniesList from "./CompaniesList";
+import { companies, BASE_URL } from "../testMockData";
+import JoblyApi from "../api";
+import exp from "constants";
 
 describe("Tests CompaniesList", () => {
+  let axiosMock: MockAdapter;
+  beforeEach(() => {
+    axiosMock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    axiosMock.reset();
+  });
   it("matches CompaniesList snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
@@ -13,6 +26,10 @@ describe("Tests CompaniesList", () => {
   });
 
   it("shows all companies in CompaniesList", async () => {
+    axiosMock.onGet(`${BASE_URL}/companies`).reply(200, { companies });
+    const res = await JoblyApi.getCompanies(null);
+    expect(res).toEqual(companies);
+    expect(res.length).toEqual(2);
     render(
       <MemoryRouter>
         <CompaniesList />
@@ -24,7 +41,12 @@ describe("Tests CompaniesList", () => {
   });
 
   it("handles search bar in CompaniesList", async () => {
-    render(
+    axiosMock.onGet(`${BASE_URL}/companies`).reply(200, { companies });
+    const res = await JoblyApi.getCompanies(null);
+    expect(res).toEqual(companies);
+    expect(res.length).toEqual(2);
+
+    const { debug } = render(
       <MemoryRouter>
         <CompaniesList />
       </MemoryRouter>
@@ -32,20 +54,18 @@ describe("Tests CompaniesList", () => {
 
     await waitFor(() => screen.findByRole("list"));
 
-    const form = screen.getByTestId("search-bar-form");
     const input = screen.getByTestId("search-bar-input");
-    const button = screen.getByTestId("search-bar-button");
-    fireEvent.change(input, { target: { value: "" } });
+    // const button = screen.getByTestId("search-bar-button");
+    // fireEvent.change(input, { target: { value: "" } });
     expect(input).toHaveValue("");
 
-    fireEvent.change(input, { target: { value: "form submit" } });
-    expect(input).toHaveValue("form submit");
-    // fireEvent.submit(form);
-
-    fireEvent.click(button);
-
-    fireEvent.change(input, { target: { value: "enter key" } });
-
-    fireEvent.submit(form, { key: "Enter", charCode: 13 });
+    fireEvent.change(input, { target: { value: "name" } });
+    expect(input).toHaveValue("name");
+    const form = await screen.findByTestId("search-bar-form");
+    fireEvent.submit(form);
+    await waitFor(() => screen.findByRole("list"));
+    const out = await waitFor(() => screen.findByRole("list"));
+    expect(out).toHaveTextContent(/arnold/i);
+    expect(screen.getByText(/companies list/i)).toBeInTheDocument();
   });
 });
