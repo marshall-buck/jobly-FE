@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 
 describe("Tests SearchBar", () => {
-  it("matches SearchBar snapshot", function () {
+  it("matches SearchBar snapshot", () => {
     const { asFragment } = render(<SearchBar handleSearch={jest.fn} />);
     expect(asFragment()).toMatchSnapshot();
   });

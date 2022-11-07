@@ -29,7 +29,7 @@ function JobsList() {
           data: jobsResults,
           isLoading: false,
         });
-      } catch (err) {
+      } catch (err: any) {
         setJobs({
           data: null,
           isLoading: false,

@@ -5,7 +5,7 @@ import UserContext from "../context/UserContext";
 import { userCtx } from "../testMockData";
 
 describe("Navbar Tests", () => {
-  it("Display name when logged in - Navbar", function () {
+  it("Display name when logged in - Navbar", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
@@ -21,7 +21,7 @@ describe("Navbar Tests", () => {
     expect(screen.queryByText(/Sign Up/)).not.toBeInTheDocument();
   });
 
-  it("matches snapshot when logged out Navbar", function () {
+  it("matches snapshot when logged out Navbar", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider value={{ user: null, token: null }}>

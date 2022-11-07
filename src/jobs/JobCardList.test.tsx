@@ -5,7 +5,7 @@ import { jobs } from "../testMockData";
 import JobCardList from "./JobCardList";
 
 describe("Tests Job Card", () => {
-  it("matches snapshot", function () {
+  it("matches snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <JobCardList jobs={jobs} />
@@ -14,7 +14,7 @@ describe("Tests Job Card", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates jobs correctly", function () {
+  it("populates jobs correctly", () => {
     render(
       <MemoryRouter>
         <JobCardList jobs={jobs} />

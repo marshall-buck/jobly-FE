@@ -49,6 +49,17 @@ const jobs: Job[] = [
   },
 ];
 
+const jobsFiltered = [
+  {
+    id: 3,
+    title: "Consulting civil engineer",
+    salary: 60000,
+    equity: "0",
+    companyHandle: "sellers-bryant",
+    companyName: "Sellers-Bryant",
+  },
+];
+
 const companies: Company[] = [
   {
     handle: "anderson-arias-morrow",
@@ -161,4 +172,5 @@ export {
   editUser,
   job2,
   BASE_URL,
+  jobsFiltered,
 };

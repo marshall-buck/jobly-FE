@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import CompanyCard from "./CompanyCard";
 
 describe("Tests CompanyCard Snapshot", () => {
-  it("matches CompanyCard snapshot", function () {
+  it("matches CompanyCard snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <CompanyCard
@@ -18,7 +18,7 @@ describe("Tests CompanyCard Snapshot", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates CompanyCard correctly", function () {
+  it("populates CompanyCard correctly", () => {
     render(
       <MemoryRouter>
         <CompanyCard

@@ -5,7 +5,7 @@ import UserContext from "./context/UserContext";
 import { userCtx } from "./testMockData";
 
 describe("Tests LandingPage", () => {
-  it("Display name when logged in - LandingPage", function () {
+  it("Display name when logged in - LandingPage", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
@@ -21,7 +21,7 @@ describe("Tests LandingPage", () => {
     expect(screen.queryByText(/Sign Up/)).not.toBeInTheDocument();
   });
 
-  it("matches snapshot when logged out - LandingPage", function () {
+  it("matches snapshot when logged out - LandingPage", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider value={{ user: null, token: null }}>

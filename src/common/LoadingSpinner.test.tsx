@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 
 describe("LoadingSpinner tests", () => {
-  it("matches LoadingSpinner snapshot", function () {
+  it("matches LoadingSpinner snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <LoadingSpinner />

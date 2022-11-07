@@ -5,11 +5,8 @@ import UserContext from "../context/UserContext";
 import { userCtx } from "../testMockData";
 
 describe("Tests NavMenus", () => {
-  it("Display name when logged in - NavMenus", function () {
-    function handleLogout() {
-      expect(true).toBe(true);
-    }
-
+  it("Display name when logged in - NavMenus", () => {
+    const handleLogout = jest.fn();
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
@@ -27,10 +24,10 @@ describe("Tests NavMenus", () => {
 
     expect(logout).toBeInTheDocument();
     fireEvent.click(logout);
-    expect.assertions(6);
+    expect.assertions(5);
   });
 
-  it("matches snapshot when logged out - NavMenus", function () {
+  it("matches snapshot when logged out - NavMenus", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider value={{ user: null, token: null }}>

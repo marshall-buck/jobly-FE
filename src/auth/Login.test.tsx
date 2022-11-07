@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 const handleLogin = jest.fn();
 
 describe("Tests Login", () => {
-  it("matches snapshot", function () {
+  it("matches snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <Login handleLogin={handleLogin} />
@@ -14,7 +14,7 @@ describe("Tests Login", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates Login form correctly", async function () {
+  it("populates Login form correctly", async () => {
     render(
       <MemoryRouter>
         <Login handleLogin={handleLogin} />

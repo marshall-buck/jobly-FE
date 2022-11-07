@@ -121,24 +121,6 @@ describe("Tests routes when user is logged in", () => {
 
     expect(screen.queryByText(/404/i)).not.toBeInTheDocument();
   });
-  // TODO: comment out when fixed
-  // it("renders 404 detail, when user logged in and tries to sign up", () => {
-  //   render(
-  //     <MemoryRouter initialEntries={[`${companiesRoute}/:handle`]}>
-  //       <UserContext.Provider
-  //         value={{ user: userCtx.user, token: userCtx.token }}
-  //       >
-  //         <RoutesList
-  //           handleSignup={jest.fn()}
-  //           handleLogin={jest.fn()}
-  //           handleEditForm={jest.fn()}
-  //         />
-  //       </UserContext.Provider>
-  //     </MemoryRouter>
-  //   );
-
-  //   expect(screen.getByText(/404/i)).toBeInTheDocument();
-  // });
 });
 
 describe("Tests routes when user is logged out", () => {

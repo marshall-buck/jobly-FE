@@ -8,7 +8,6 @@ import JobsList from "./JobsList";
 
 describe("Tests JobsList", () => {
   let axiosMock: MockAdapter;
-
   beforeEach(() => {
     axiosMock = new MockAdapter(axios);
   });
@@ -16,7 +15,6 @@ describe("Tests JobsList", () => {
   afterEach(() => {
     axiosMock.reset();
   });
-
   it("matches JobsList snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
@@ -94,9 +92,9 @@ describe("Tests JobsList", () => {
 
     fireEvent.click(button);
 
-    fireEvent.change(input, { target: { value: "enter key" } });
+    fireEvent.change(input, { target: { value: "engineer" } });
 
     fireEvent.submit(form, { key: "Enter", charCode: 13 });
-    expect(input).toHaveValue("enter key");
+    expect(input).toHaveValue("engineer");
   });
 });

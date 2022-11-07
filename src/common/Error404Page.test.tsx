@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import Error404Page from "./Error404Page";
 
 describe("Error404Page page tests", () => {
-  it("matches Error404Page snapshot", function () {
+  it("matches Error404Page snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <Error404Page />

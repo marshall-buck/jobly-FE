@@ -1,25 +1,13 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import EditProfile from "./EditProfile";
-import { BASE_URL, editUser, userCtx } from "../testMockData";
+import { editUser, userCtx } from "../testMockData";
 import UserContext from "../context/UserContext";
 import { MemoryRouter } from "react-router-dom";
-import MockAdapter from "axios-mock-adapter";
-import axios from "axios";
-import JoblyApi from "../api";
 
 let editUserMock = jest.fn();
 
 describe("Tests EditProfile", () => {
-  // let axiosMock: MockAdapter;
-  // beforeEach(() => {
-  //   axiosMock = new MockAdapter(axios);
-  // });
-
-  // afterEach(() => {
-  //   axiosMock.reset();
-  // });
-
-  it("matches EditProfile snapshot", function () {
+  it("matches EditProfile snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider
@@ -32,7 +20,7 @@ describe("Tests EditProfile", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("populates EditProfile form with data", function () {
+  it("populates EditProfile form with data", () => {
     render(
       <MemoryRouter>
         <UserContext.Provider
