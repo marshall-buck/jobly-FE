@@ -27,7 +27,7 @@ interface EditProfileInterfaceProps {
 
 function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
   const { user } = useContext(UserContext);
-
+  const [error, setError] = useState<any[]>([]);
   const [formData, setFormData] = useState<FormEditUser>(user as FormEditUser);
 
   // setFormData({ username, firstName, lastName, email });
@@ -47,10 +47,14 @@ function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
   // TODO: try catch
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    await handleEditForm(formData);
-    // setFormData(() => user);
+    try {
+      await handleEditForm(formData);
+      setFormData(user as FormEditUser);
+    } catch (err: any) {
+      setError((err) => [...err]);
+    }
   }
-
+  // console.log("*****************", error);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form
@@ -59,6 +63,7 @@ function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
         onSubmit={handleSubmit}
       >
         <div className="card-body">
+          {error && <p>{error[0]}</p>}
           <div className="form-control">
             <label className="label" htmlFor="username">
               <span className="label-text">Username</span>
