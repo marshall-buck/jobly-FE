@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { FormLoginUser } from "../interfaces";
 
@@ -24,7 +25,7 @@ const initialState: FormLoginUser = {
 
 function Login({ handleLogin }: LoginPropsInterface) {
   const [formData, setFormData] = useState<FormLoginUser>(initialState);
-
+  const navigate = useNavigate();
   /** Update local state w/curr state of input elem */
   function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = evt.target;
@@ -38,6 +39,7 @@ function Login({ handleLogin }: LoginPropsInterface) {
     evt.preventDefault();
     try {
       await handleLogin(formData);
+      navigate("/companies");
     } catch (err) {
       console.debug("from login: ", err);
     }

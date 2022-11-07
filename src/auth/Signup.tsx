@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { FormSignupUser, User } from "../interfaces";
 
@@ -22,7 +23,7 @@ interface SignupPropsInterface {
 *
 * App -> RoutesList => Signup
 */
-// TODO: if user is loggedin, redirect to error page your are already logged in
+// TODO: if user is logged in, redirect to error page your are already logged in
 const initialState = {
   username: "",
   password: "",
@@ -32,7 +33,7 @@ const initialState = {
 };
 function Signup({ handleSignup }: SignupPropsInterface) {
   const [formData, setFormData] = useState<FormSignupUser>(initialState);
-
+  const navigate = useNavigate();
   /** Update local state w/curr state of input elem */
   function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = evt.target;
@@ -44,8 +45,13 @@ function Signup({ handleSignup }: SignupPropsInterface) {
 
   async function handleSubmitSignup(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    await handleSignup(formData);
-    setFormData(initialState);
+    try {
+      await handleSignup(formData);
+      setFormData(initialState);
+      navigate("/companies");
+    } catch (err) {
+      console.debug(err);
+    }
   }
 
   return (

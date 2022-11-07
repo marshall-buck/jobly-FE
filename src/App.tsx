@@ -13,7 +13,6 @@ import {
   User,
 } from "./interfaces";
 import NavMenu from "./navigation/NavMenus";
-import { useNavigate } from "react-router-dom";
 
 interface UserStateInterface {
   data: User | null;
@@ -34,8 +33,6 @@ function App() {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
-
-  const navigate = useNavigate();
 
   /**
    *  Checks for token and hydrates user on load and when token is changed.
@@ -72,18 +69,9 @@ function App() {
    * { username, password, firstName, lastName, email}
    */
   async function handleSignup(formData: FormSignupUser): Promise<void> {
-    try {
-      setUser((user) => {
-        return { ...user, isLoading: false };
-      });
-      const token = await JoblyApi.handleSignup(formData);
-      setToken(token);
-      localStorage.setItem("token", token);
-      navigate("/companies");
-    } catch (err) {
-      setUser({ data: null, isLoading: false });
-      console.log("from signup");
-    }
+    const token = await JoblyApi.handleSignup(formData);
+    setToken(token);
+    localStorage.setItem("token", token);
   }
 
   /**
@@ -94,10 +82,8 @@ function App() {
    */
   async function handleLogin(formData: FormLoginUser): Promise<void> {
     const token = await JoblyApi.loginUserApi(formData);
-
     setToken(token);
     localStorage.setItem("token", token);
-    navigate("/companies");
   }
 
   /**
