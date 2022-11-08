@@ -43,6 +43,7 @@ function RoutesList({
         </>
       )}
       <Route path="/" element={<LandingPage />} />
+
       {user && (
         <>
           <Route

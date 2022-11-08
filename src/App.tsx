@@ -13,6 +13,8 @@ import {
   User,
 } from "./interfaces";
 import NavMenu from "./navigation/NavMenus";
+import { AlertProvider } from "./context/UseAlertContext";
+import AlertPopup from "./common/Alert";
 
 interface UserStateInterface {
   data: User | null;
@@ -123,29 +125,31 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user: user.data, token }}>
-      <div className="drawer" data-theme="light">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col bg-base-300">
-          <NavBar handleLogout={handleLogout} />
-
-          {/* <!-- Page content here --> */}
-          <div>
-            <RoutesList
-              handleSignup={handleSignup}
-              handleLogin={handleLogin}
-              handleEditForm={handleEditForm}
-            />
+      <AlertProvider>
+        <div className="drawer" data-theme="light">
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content flex flex-col bg-base-300">
+            <NavBar handleLogout={handleLogout} />
+            <AlertPopup />
+            {/* <!-- Page content here --> */}
+            <div>
+              <RoutesList
+                handleSignup={handleSignup}
+                handleLogin={handleLogin}
+                handleEditForm={handleEditForm}
+              />
+            </div>
+          </div>
+          {/* TODO: extract */}
+          <div className="drawer-side">
+            <label htmlFor="my-drawer" className="drawer-overlay"></label>
+            <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
+              {/* <!-- Sidebar content here --> */}
+              <NavMenu handleLogout={handleLogout} />
+            </ul>
           </div>
         </div>
-        {/* TODO: extract */}
-        <div className="drawer-side">
-          <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
-            {/* <!-- Sidebar content here --> */}
-            <NavMenu handleLogout={handleLogout} />
-          </ul>
-        </div>
-      </div>
+      </AlertProvider>
     </UserContext.Provider>
   );
 }

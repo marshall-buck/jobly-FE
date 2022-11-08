@@ -7,12 +7,6 @@ type User = {
   isAdmin?: boolean;
 };
 
-enum AlertType {
-  INFO = "alert-info",
-  SUCCESS = "alert-success",
-  WARNING = "alert-warning",
-  ERROR = "alert-error",
-}
 type FormLoginUser = Pick<User, "username" | "password">;
 
 type FormEditUser = Omit<User, "isAdmin">;
@@ -52,6 +46,13 @@ interface UserContextInterface {
   token: string | null;
 }
 
+enum AlertTypes {
+  INFO = "alert-info",
+  SUCCESS = "alert-success",
+  WARNING = "alert-warning",
+  ERROR = "alert-error",
+}
+
 export type {
   User,
   TokenPayload,
@@ -63,4 +64,4 @@ export type {
   Job,
   FormSignupUser,
 };
-export { AlertType };
+export { AlertTypes };

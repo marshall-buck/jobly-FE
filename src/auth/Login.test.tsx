@@ -1,10 +1,4 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  act,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
 import { MemoryRouter } from "react-router-dom";
 
@@ -54,7 +48,7 @@ describe("Tests Login", () => {
       throw Array.isArray(message) ? message : [message];
     });
 
-    const { debug } = render(
+    render(
       <MemoryRouter>
         <Login handleLogin={asyncMock} />
       </MemoryRouter>
@@ -78,28 +72,5 @@ describe("Tests Login", () => {
     await waitFor(() => {
       expect(asyncMock).toHaveBeenCalled();
     });
-
-    const message = screen.getByTestId("alert-messages");
-    await waitFor(() => {
-      expect(message).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText(/error/i)).toBeInTheDocument();
-    });
-
-    const closeButton = screen.getByLabelText("Close");
-
-    await waitFor(() => {
-      expect(closeButton).toBeInTheDocument();
-    });
-
-    fireEvent.click(closeButton);
-
-    // await waitFor(() => {
-    //   expect(closeButton).not.toBeInTheDocument();
-    // });
-
-    debug();
   });
 });
