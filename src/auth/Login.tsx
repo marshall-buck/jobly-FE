@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertPopup from "../common/Alert";
 import useAlert from "../hooks/useAlert";
 
 import { AlertTypes, FormLoginUser } from "../interfaces";
@@ -92,6 +93,7 @@ function Login({ handleLogin }: LoginPropsInterface) {
 
           <div className="form-control mt-6">
             <button className="btn btn-primary">Login</button>
+            <AlertPopup />
           </div>
         </div>
       </form>

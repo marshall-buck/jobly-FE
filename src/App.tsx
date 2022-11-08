@@ -130,7 +130,7 @@ function App() {
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col bg-base-300">
             <NavBar handleLogout={handleLogout} />
-            <AlertPopup />
+            {/* <AlertPopup /> */}
             {/* <!-- Page content here --> */}
             <div>
               <RoutesList
