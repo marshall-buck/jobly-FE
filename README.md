@@ -38,5 +38,5 @@ https://github.com/marshall-buck/express-jobly-solution
 - [ ] let users submit  and un-submit applications
 - [ ] add live search
 - [ ] let admin users edit company info
-- [ ] handle errors with ui
 - [ ] add global loader
+- [ ] fix onSuccess alert to show longer
