@@ -7,6 +7,12 @@ type User = {
   isAdmin?: boolean;
 };
 
+enum AlertType {
+  INFO = "alert-info",
+  SUCCESS = "alert-success",
+  WARNING = "alert-warning",
+  ERROR = "alert-error",
+}
 type FormLoginUser = Pick<User, "username" | "password">;
 
 type FormEditUser = Omit<User, "isAdmin">;
@@ -57,3 +63,4 @@ export type {
   Job,
   FormSignupUser,
 };
+export { AlertType };
