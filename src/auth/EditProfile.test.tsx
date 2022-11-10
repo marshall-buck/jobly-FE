@@ -3,6 +3,7 @@ import EditProfile from "./EditProfile";
 import { editUser, userCtx } from "../testMockData";
 import UserContext from "../context/UserContext";
 import { MemoryRouter } from "react-router-dom";
+import { AlertProvider } from "../providers/AlertProvider";
 
 let editUserMock = jest.fn();
 
@@ -86,47 +87,51 @@ describe("Tests EditProfile", () => {
     await waitFor(() => expect(editUserMock).toHaveBeenCalledWith(editUser));
   });
 
-  // it("submits EditProfile handles err", async () => {
-  //   editUserMock = jest
-  //     .fn()
-  //     .mockRejectedValue(new Error("Async error message"));
-  //   const { debug } = render(
-  //     <MemoryRouter>
-  //       <UserContext.Provider
-  //         value={{ user: userCtx.user, token: userCtx.token }}
-  //       >
-  //         <EditProfile handleEditForm={editUserMock} />
-  //       </UserContext.Provider>
-  //     </MemoryRouter>
-  //   );
+  it("submits EditProfile handles err", async () => {
+    const asyncMock = jest.fn().mockImplementation(() => {
+      let message = "Bad Stuff is Happening";
+      throw Array.isArray(message) ? message : [message];
+    });
+    render(
+      <MemoryRouter>
+        <AlertProvider>
+          <UserContext.Provider
+            value={{ user: userCtx.user, token: userCtx.token }}
+          >
+            <EditProfile handleEditForm={asyncMock} />
+          </UserContext.Provider>
+        </AlertProvider>
+      </MemoryRouter>
+    );
 
-  //   const form = (await screen.findByTestId(
-  //     "edit-user-form"
-  //   )) as HTMLFormElement;
+    expect(screen.queryByTestId("alert-messages")).not.toBeInTheDocument();
 
-  //   const firstName = (await screen.findByRole("textbox", {
-  //     name: /first Name/i,
-  //   })) as HTMLElement;
-  //   const lastName = (await screen.findByRole("textbox", {
-  //     name: /last Name/i,
-  //   })) as HTMLElement;
-  //   const email = (await screen.findByRole("textbox", {
-  //     name: /email/i,
-  //   })) as HTMLElement;
+    const form = (await screen.findByTestId(
+      "edit-user-form"
+    )) as HTMLFormElement;
 
-  //   fireEvent.change(firstName, { target: { value: editUser.firstName } });
-  //   fireEvent.change(lastName, { target: { value: editUser.lastName } });
-  //   fireEvent.change(email, { target: { value: editUser.email } });
+    const firstName = (await screen.findByRole("textbox", {
+      name: /first Name/i,
+    })) as HTMLElement;
+    const lastName = (await screen.findByRole("textbox", {
+      name: /last Name/i,
+    })) as HTMLElement;
+    const email = (await screen.findByRole("textbox", {
+      name: /email/i,
+    })) as HTMLElement;
 
-  //   fireEvent.submit(form);
-  //   await waitFor(() => expect(editUserMock).toHaveBeenCalledWith(editUser));
-  //   // expect(await screen.findByText(/error/)).toBeInTheDocument();
+    fireEvent.change(firstName, { target: { value: editUser.firstName } });
+    fireEvent.change(lastName, { target: { value: editUser.lastName } });
+    fireEvent.change(email, { target: { value: editUser.email } });
 
-  //   debug();
-
-  //   await waitFor(() => expect(lastName).toHaveValue(editUser.lastName));
-  //   await waitFor(() => expect(firstName).toHaveValue(editUser.firstName));
-  //   await waitFor(() => expect(email).toHaveValue(editUser.email));
-  //   await waitFor(() => expect(editUserMock).toHaveBeenCalledWith(editUser));
-  // });
+    fireEvent.submit(form);
+    await waitFor(() => {
+      expect(asyncMock).toHaveBeenCalled();
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId("alert-messages")).toHaveTextContent(
+        "Bad Stuff is Happening"
+      );
+    });
+  });
 });

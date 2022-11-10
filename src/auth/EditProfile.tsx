@@ -1,8 +1,8 @@
-// import { Navigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { FormEditUser } from "../interfaces";
-
+import { FormEditUser, AlertTypes } from "../interfaces";
+import AlertPopup from "../common/Alert";
 import UserContext from "../context/UserContext";
+import useAlert from "../hooks/useAlert";
 
 interface EditProfileInterfaceProps {
   handleEditForm: (formData: FormEditUser) => Promise<void>;
@@ -27,10 +27,8 @@ interface EditProfileInterfaceProps {
 
 function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
   const { user } = useContext(UserContext);
-  const [error, setError] = useState<any[]>([]);
   const [formData, setFormData] = useState<FormEditUser>(user as FormEditUser);
-
-  // setFormData({ username, firstName, lastName, email });
+  const { setAlert } = useAlert();
 
   /** Update local state w/curr state of input elem */
   function handleChange(
@@ -44,17 +42,19 @@ function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
       [name]: value,
     }));
   }
-  // TODO: try catch
+
+  /** handle submit edit form and display proper message */
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     try {
       await handleEditForm(formData);
       setFormData(user as FormEditUser);
+      setAlert("Edit Success", AlertTypes.SUCCESS);
     } catch (err: any) {
-      setError((err) => [...err]);
+      setAlert(err, AlertTypes.ERROR);
     }
   }
-  // console.log("*****************", error);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form
@@ -62,8 +62,8 @@ function EditProfile({ handleEditForm }: EditProfileInterfaceProps) {
         className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
         onSubmit={handleSubmit}
       >
+        <AlertPopup />
         <div className="card-body">
-          {error && <p>{error[0]}</p>}
           <div className="form-control">
             <label className="label" htmlFor="username">
               <span className="label-text">Username</span>

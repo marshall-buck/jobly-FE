@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import AlertContext from "../context/UseAlertContext";
+import { AlertContext } from "../context/AlertContext";
 import { AlertTypes } from "../interfaces";
 import AlertPopup from "./Alert";
 

@@ -13,8 +13,7 @@ import {
   User,
 } from "./interfaces";
 import NavMenu from "./navigation/NavMenus";
-import { AlertProvider } from "./context/UseAlertContext";
-import AlertPopup from "./common/Alert";
+import { AlertProvider } from "./providers/AlertProvider";
 
 interface UserStateInterface {
   data: User | null;

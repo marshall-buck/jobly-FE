@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { FormSignupUser, User } from "../interfaces";
+import { AlertTypes, FormSignupUser, User } from "../interfaces";
+import AlertPopup from "../common/Alert";
+import useAlert from "../hooks/useAlert";
 
 interface SignupPropsInterface {
   handleSignup: (formData: User) => Promise<void>;
@@ -23,7 +24,7 @@ interface SignupPropsInterface {
 *
 * App -> RoutesList => Signup
 */
-// TODO: if user is logged in, redirect to error page your are already logged in
+
 const initialState = {
   username: "",
   password: "",
@@ -34,6 +35,8 @@ const initialState = {
 function Signup({ handleSignup }: SignupPropsInterface) {
   const [formData, setFormData] = useState<FormSignupUser>(initialState);
   const navigate = useNavigate();
+  const { setAlert } = useAlert();
+
   /** Update local state w/curr state of input elem */
   function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = evt.target;
@@ -43,14 +46,16 @@ function Signup({ handleSignup }: SignupPropsInterface) {
     }));
   }
 
-  async function handleSubmitSignup(evt: React.FormEvent<HTMLFormElement>) {
+  /** handle submit signup form and display proper message */
+  async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     try {
       await handleSignup(formData);
       setFormData(initialState);
       navigate("/companies");
-    } catch (err) {
-      console.debug(err);
+      setAlert("Congrats", AlertTypes.SUCCESS);
+    } catch (err: any) {
+      setAlert(err, AlertTypes.ERROR);
     }
   }
 
@@ -58,9 +63,10 @@ function Signup({ handleSignup }: SignupPropsInterface) {
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form
         className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
-        onSubmit={handleSubmitSignup}
+        onSubmit={handleSubmit}
         data-cy="signup-form"
       >
+        <AlertPopup />
         <div className="card-body">
           <div className="form-control">
             <label className="label" htmlFor="username">

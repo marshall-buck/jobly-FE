@@ -1,8 +1,20 @@
 import { render, screen } from "@testing-library/react";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 
 import { MemoryRouter } from "react-router-dom";
+
 import App from "./App";
+
 describe("Test App", () => {
+  let axiosMock: MockAdapter;
+  beforeEach(() => {
+    axiosMock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    axiosMock.reset();
+  });
   it("matches snapshot", () => {
     const { asFragment } = render(
       <MemoryRouter>
@@ -19,18 +31,7 @@ describe("Test App", () => {
       </MemoryRouter>
     );
 
-    expect(screen.queryByText(/jest first/)).not.toBeInTheDocument();
     expect(screen.getAllByText(/sign up/i)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/login/i)).toHaveLength(4);
   });
-
-  // it("goes to login page", () => {
-  //   const { debug } = render(
-  //     <MemoryRouter>
-  //       <App />
-  //     </MemoryRouter>
-  //   );
-
-  //   debug();
-  // });
 });
