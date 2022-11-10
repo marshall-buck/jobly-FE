@@ -15,6 +15,7 @@ import {
 import NavMenu from "./navigation/NavMenus";
 import { AlertProvider } from "./providers/AlertProvider";
 import AlertPopup from "./common/Alert";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 interface UserStateInterface {
   data: User | null;
@@ -32,9 +33,8 @@ function App() {
     data: null,
     isLoading: true,
   });
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("token")
-  );
+
+  const [token, setToken] = useLocalStorage<string | null>("token", null);
 
   /**
    *  Checks for token and hydrates user on load and when token is changed.
@@ -54,7 +54,7 @@ function App() {
         } catch (err) {
           console.error("App loadUserInfo: problem loading", err);
 
-          setToken(null);
+          // setToken(null);
           setUser({ data: null, isLoading: false });
         }
       } else {
@@ -73,7 +73,6 @@ function App() {
   async function handleSignup(formData: FormSignupUser): Promise<void> {
     const token = await JoblyApi.handleSignup(formData);
     setToken(token);
-    localStorage.setItem("token", token);
   }
 
   /**
@@ -85,7 +84,6 @@ function App() {
   async function handleLogin(formData: FormLoginUser): Promise<void> {
     const token = await JoblyApi.loginUserApi(formData);
     setToken(token);
-    localStorage.setItem("token", token);
   }
 
   /**
@@ -96,7 +94,6 @@ function App() {
     setToken(null);
     setUser({ data: null, isLoading: false });
     JoblyApi.token = null;
-    localStorage.removeItem("token");
   }
 
   /**

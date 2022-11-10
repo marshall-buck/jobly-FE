@@ -3,8 +3,12 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
 import { MemoryRouter } from "react-router-dom";
+import JoblyApi from "./api";
 
 import App from "./App";
+import UserContext from "./context/UserContext";
+import RoutesList from "./navigation/RoutesList";
+import { BASE_URL, user, userCtx } from "./testMockData";
 
 describe("Test App", () => {
   let axiosMock: MockAdapter;
