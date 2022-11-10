@@ -21,7 +21,7 @@ const AlertProvider = ({ children }: AlertProviderInterface) => {
     // setTimeout(() => {
     //   setMessage(null);
     //   setType(null);
-    // }, ALERT_TIME);
+    // }, 4000);
   };
 
   return (

@@ -33,7 +33,7 @@ function RoutesList({
 
   return (
     <Routes>
-      {!user && (
+      {/* {!user && (
         <>
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
           <Route
@@ -41,8 +41,10 @@ function RoutesList({
             element={<Signup handleSignup={handleSignup} />}
           />
         </>
-      )}
+      )} */}
       <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+      <Route path="/signup" element={<Signup handleSignup={handleSignup} />} />
 
       {user && (
         <>

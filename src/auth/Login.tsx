@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertPopup from "../common/Alert";
 import useAlert from "../hooks/useAlert";
@@ -28,6 +28,7 @@ const initialState: FormLoginUser = {
 function Login({ handleLogin }: LoginPropsInterface) {
   const [formData, setFormData] = useState<FormLoginUser>(initialState);
   const { setAlert } = useAlert();
+
   const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
@@ -45,7 +46,6 @@ function Login({ handleLogin }: LoginPropsInterface) {
     try {
       await handleLogin(formData);
 
-      setAlert("Congrats", AlertTypes.SUCCESS);
       navigate("/companies");
     } catch (err: any) {
       setAlert(err, AlertTypes.ERROR);
